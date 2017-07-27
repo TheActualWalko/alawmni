@@ -1,0 +1,261 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "compass/css3";
+
+*{
+  box-sizing:border-box;
+}
+
+$blue: #102C42;
+$green: #58B69E;
+
+html, body{
+  background-image:url("../img/london.jpg");
+  background-size:cover;
+  background-position:50% 50%;
+  background-repeat:no-repeat;
+  height:100%;
+  width:100%;
+  margin:0; 
+  padding:0;
+}
+
+body{
+  font-family:"Ropa Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow:scroll;
+  background-color:#222;
+}
+
+.background{
+  position:fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background-image:url("../img/london.jpg");
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position:50% 50%;
+}
+
+#react-container{
+  position:relative;
+  z-index:2;
+}
+
+main{
+  width:100%;
+  height:100%;
+  padding-bottom:20px;
+}
+
+.main-header{
+  color:white;
+  width:640px;
+  margin:60px auto 60px auto;
+  h1{
+    float:left;
+  }
+  h1 span{
+    display:inline-block;
+    width:auto;
+    background-color:$green;
+    font-size:40px;
+  }
+  h1 span{
+    padding:12px 16px;
+  }
+  h2{
+    float:right;
+    margin-right:-23px;
+  }
+  img{
+    width:400px;
+    height:120px;
+  }
+  &:after{
+    content:"";
+    clear:both;
+    width:100%;
+    display:block;
+  }
+}
+
+.main-footer{
+  padding:20px 0;
+  color:white;
+  left:0;
+  right:0;
+  width:auto;
+  p{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto;
+  }
+  a{
+    text-decoration: underline;
+    color:inherit;
+  }
+}
+
+.autocomplete-input{
+  width:100%;
+  label{
+    color:white;
+    display:block;
+    font-size:32px;
+    margin-bottom:15px;
+    font-weight:200;
+  }
+  input{
+    color:$green;
+    background-color:white;
+    border:none;
+    padding:12px 16px;
+    display:block;
+    font-size:22px;
+    width:100%;
+  }
+  ul{
+    background-color:white;
+    color:$blue;
+    max-height:483px;
+    overflow:scroll;
+    li{
+      padding:12px 16px;
+      font-size:22px;
+      &:hover, &.active{
+        background-color:$green;
+        color:white;
+        cursor:pointer;
+      }
+    }
+  }
+}
+
+.search, .results{
+   width:600px;
+   margin:0 auto;
+   position:relative;
+   z-index:2;
+}
+
+.results .loading{
+  background-color:rgba($blue, 0.5);
+  margin-top:10px;
+  color:white;
+  text-align:center;
+  width:100%;
+  padding:20px;
+  font-style:italic;
+}
+
+.results .student{
+  background-color:$blue;
+  color:white;
+  margin-top:10px;
+  width:100%;
+  &:hover, &.active{
+    cursor:pointer;
+    background-color:lighten($blue, 10%);
+  }
+  a{
+    display:block;
+    padding:20px 30px;
+    text-decoration:none;
+    color:white;
+  }
+  h3{
+    font-size:30px;
+    margin-bottom:14px;
+  }
+  h4{
+    font-size:22px;
+    img{
+      width:24px;
+      height:auto;
+      vertical-align:middle;
+      margin-right:5px;
+    }
+  }
+  strong, em{
+    text-transform: uppercase;
+    font-weight:bold;
+  }
+  strong{
+    color:$green;
+  }
+}
+
+@media screen and (max-width:680px){
+  main{
+    padding:40px;
+  }
+  .main-header{
+    margin-top:0;
+    margin-bottom:20px;
+  }
+  .main-header, .search, .results{
+    width:100%
+  }
+}
+
+@media screen and (max-width:650px){
+  .main-header h2{
+    display:block;
+    width:100%;
+    margin-right:0;
+    margin-top:20px;
+    position:relative;
+    left:-23px;
+  }
+}
+
+@media screen and (max-width:540px){
+  .main-footer p{
+    max-width:315px;
+    margin-top: 8px;
+  }
+}
+
+@media screen and (max-width:440px){
+  main{
+    padding:20px;
+  }
+  .main-header h2{
+    img{
+      width:260px;
+      height:80px
+    }
+  }
+  .autocomplete-input{
+    label{
+      font-size:24px;
+      margin-bottom:5px;
+    }
+    input{
+      padding:12px 16px;
+      font-size:18px;
+    }
+    ul li{
+      font-size:18px;
+    }
+  }
+  .results .student{
+    a{
+      padding:10px;
+    }
+    h3{
+      font-size:22px;
+      margin-bottom:8px;
+    }
+    h4{
+      font-size:16px;
+    }
+  }
+}

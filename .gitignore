@@ -1,3 +1,7 @@
 */node_modules/*
 *.codekit
 *.codekit3
+*/min/*
+*-min.*
+*/dist/*
+*/css/*
