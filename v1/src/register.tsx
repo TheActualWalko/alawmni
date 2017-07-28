@@ -7,24 +7,26 @@ import AutocompleteInput from './autocomplete-input';
 import {getAll} from './register/selectors';
 import {
   updateFirmName,
-  updateName,
+  updateFirstName,
+  updateLastName,
   updateEmail,
   selectFirm
 } from './register/actions';
 import {connect} from 'react-redux';
 
 const Register = ({
-  name, email, firmName, firm, highlightIndex, submittable,
-  updateName, updateEmail, updateFirmName, selectFirm
+  firstName, lastName, email, firmName, firm, highlightIndex, submittable,
+  updateFirstName, updateLastName, updateEmail, updateFirmName, selectFirm
 }) => (
   <div>
     <Hero />
     <form className="register">
-      <Input text={name} id="name-input" label="Enter your name:" onChange={updateName}/>
+      <Input text={firstName} id="first-name-input" label="Enter your first name:" onChange={updateFirstName}/>
+      <Input text={lastName} id="last-name-input" label="Enter your last name:" onChange={updateLastName}/>
       <Input text={email} id="email-input" email label="Enter your email:" onChange={updateEmail}/>
       <AutocompleteInput
         id="firm-input"
-        label="Which firm do you know about?"
+        label="Name of firm in which you have insight:"
         text={firmName}
         data={firms}
         selected={firm}
@@ -40,7 +42,8 @@ const Register = ({
 const mapStateToProps = getAll;
 const mapDispatchToProps = {
   updateFirmName,
-  updateName,
+  updateFirstName,
+  updateLastName,
   updateEmail,
   selectFirm
 };

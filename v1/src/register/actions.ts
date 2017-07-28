@@ -16,10 +16,18 @@ export const selectFirm = (firm: any)=>{
   };
 }
 
-export const UPDATE_NAME = 'alawmni/register/UPDATE_NAME';
-export const updateName = (text: string)=>{
+export const UPDATE_FIRST_NAME = 'alawmni/register/UPDATE_FIRST_NAME';
+export const updateFirstName = (text: string)=>{
   return {
-    type: UPDATE_NAME,
+    type: UPDATE_FIRST_NAME,
+    text
+  };
+}
+
+export const UPDATE_LAST_NAME = 'alawmni/register/UPDATE_LAST_NAME';
+export const updateLastName = (text: string)=>{
+  return {
+    type: UPDATE_LAST_NAME,
     text
   };
 }

@@ -1,6 +1,7 @@
 import {
   UPDATE_FIRM_NAME,
-  UPDATE_NAME,
+  UPDATE_FIRST_NAME,
+  UPDATE_LAST_NAME,
   UPDATE_EMAIL,
   SELECT_FIRM,
   MOVE_HIGHLIGHT_INDEX
@@ -10,7 +11,8 @@ export default (
   state: any = {
     firmName: '',
     firm: undefined,
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     highlightIndex: -1
   },
@@ -36,10 +38,16 @@ export default (
         firm: action.firm,
         highlightIndex: -1
       };
-    case UPDATE_NAME:
+    case UPDATE_FIRST_NAME:
       return {
         ...state,
-        name: action.text,
+        firstName: action.text,
+        highlightIndex: -1
+      };
+    case UPDATE_LAST_NAME:
+      return {
+        ...state,
+        lastName: action.text,
         highlightIndex: -1
       };
     case UPDATE_EMAIL:

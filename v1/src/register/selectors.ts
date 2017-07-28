@@ -7,19 +7,21 @@ const createRegisterSelector = subselect(register);
 
 export const firmName = createRegisterSelector('firmName', '');
 export const firm = createRegisterSelector('firm');
-export const name = createRegisterSelector('name', '');
+export const firstName = createRegisterSelector('firstName', '');
+export const lastName = createRegisterSelector('lastName', '');
 export const email = createRegisterSelector('email', '');
 export const highlightIndex = createRegisterSelector('highlightIndex', -1);
 
 export const submittable = createSelector(
-  [firm, name, email],
-  (firm, name, email) => !!firm && !!name && !!email
+  [firm, firstName, lastName, email],
+  (firm, firstName, lastName, email) => !!firm && !!firstName && !!lastName && !!email
 );
 
 export const getAll = createStructuredSelector({
   firmName,
   firm,
-  name,
+  firstName,
+  lastName,
   email,
   highlightIndex,
   submittable
