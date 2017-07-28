@@ -14,12 +14,12 @@
 
   $addStudentStmt = $mysqli->prepare("INSERT INTO kcl_students.students (name, email) VALUES (?, ?);");
   $addStudentStmt->bind_param('ss', $name, $email);
-  $addStudentStmt->execute();
+  //$addStudentStmt->execute();
 
   // get LAST_INSERT_ID here
 
   $connectCompanyStmt = $mysqli->prepare("INSERT INTO kcl_students.student_companies (student_id, company_id) VALUES (?, ?);");
   $connectCompanyStmt->bind_param('ii', $studentID, $firmID);
-  $connectCompanyStmt->execute();
+  //$connectCompanyStmt->execute();
   $mysqli->close();
 ?>
