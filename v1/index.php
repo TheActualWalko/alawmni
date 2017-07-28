@@ -29,7 +29,7 @@
         <?php
           $result = $mysqli->query("SELECT name, id FROM companies;");
           while( $row = $result->fetch_assoc() ){
-            echo "{ name : '".$row["name"]."', id : ".$row["id"]." },";
+            echo "{name: '".$row["name"]."', id: ".$row["id"]."},";
           }
           $result->free();
           $mysqli->close();
