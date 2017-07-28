@@ -46,12 +46,12 @@ const search = (props: searchProps) => {
 
 const mapStateToProps = (state) => {
   return {
-    text: state.text,
-    selected: state.firm,
-    autocompletes: state.autocompletes,
-    isWaitingForStudents: state.isWaitingForStudents,
-    highlightIndex: state.highlightIndex,
-    hasText: state.text !== '' && state.text !== undefined 
+    text: state.search.text,
+    selected: state.search.firm,
+    autocompletes: state.search.autocompletes,
+    isWaitingForStudents: state.search.isWaitingForStudents,
+    highlightIndex: state.search.highlightIndex,
+    hasText: state.search.text !== '' && state.search.text !== undefined 
   };
 };
 const mapDispatchToProps = (dispatch) => {

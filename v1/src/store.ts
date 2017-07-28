@@ -4,18 +4,21 @@ declare var firms: string[];
 declare var statics: ClientStatics;
 
 import reduxThunk from './redux-thunk';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {routerReducer, routerMiddleware} from 'react-router-redux';
+import history from './history';
 import {UPDATE_TEXT, SELECT_FIRM, RECEIVE_STUDENTS, MOVE_HIGHLIGHT_INDEX, moveHighlightIndex, selectFirm} from './actions';
 
 import getAutocompletes from './get-autocompletes';
 
-const reducer = (
+const searchReducer = (
   state: any = {
     text: '',
     firm: '',
     highlightIndex: -1,
     isWaitingForStudents: false,
     students: [],
+    routing: routerReducer,
     statics
   },
   action
@@ -58,8 +61,12 @@ const reducer = (
   }
 };
 
-const store = applyMiddleware(reduxThunk)(createStore)(reducer);
+const reducer = combineReducers({
+  search: searchReducer, 
+  routing: routerReducer
+});
 
+const store = applyMiddleware(reduxThunk, routerMiddleware(history))(createStore)(reducer, undefined);
 const titleElement: any = document.querySelector('title');
 titleElement.innerText = statics.docTitle;
 

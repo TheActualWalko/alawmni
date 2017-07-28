@@ -1,18 +1,25 @@
-import { Provider } from 'react-redux';
 import React = require('react');
-import Hero from './hero';
-import Search from './search';
-import Results from './results';
+import { Provider } from 'react-redux';
+import history from './history';
 import store from './store';
+import { Route } from 'react-router';
+import { ConnectedRouter } from 'react-router-redux';
+import Home from './home';
+import Register from './register';
+
+const wrapper = ({children}) => <div>{children}</div>;
+
 export default class App extends React.Component<{},{}>{
+  // for some reason these components aren't typechecking properly :/
   render() {
     return (
       <Provider store={store}>
-        <main>
-          <Hero />
-          <Search />
-          <Results />
-        </main>
+        <ConnectedRouter history={history}>
+          <main>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/register" component={Register} />
+          </main>
+        </ConnectedRouter>
       </Provider>
     );
   }

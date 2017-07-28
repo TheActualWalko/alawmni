@@ -1,7 +1,8 @@
 import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 import React = require('react');
 
-const results = ({students, firm, isWaitingForStudents, hasAutocompletes, highlightIndex})=>{
+const results = ({students, firm, isWaitingForStudents, hasAutocompletes, highlightIndex, toRegister})=>{
   return (
     <ul className="results">
       {isWaitingForStudents && <li className="loading">loading...</li> }
@@ -21,7 +22,7 @@ const results = ({students, firm, isWaitingForStudents, hasAutocompletes, highli
       }
       <li className="main-footer">
         <p>
-          If you would like to be a part of this database please <a href="http://bit.ly/kclls-adp">click here to sign up.</a>
+          If you would like to be a part of this database please <a onClick={toRegister}>click here to sign up.</a>
         </p>
         <p>
           Email <a href="mailto:kcllsgeneral@gmail.com" target="_blank">kcllsgeneral@gmail.com</a> for any questions.
@@ -32,13 +33,14 @@ const results = ({students, firm, isWaitingForStudents, hasAutocompletes, highli
 };
 
 
-const mapStateToProps = (state)=>{
-  return {
-    highlightIndex: state.highlightIndex,
-    hasAutocompletes: state.text !== state.firm,
-    isWaitingForStudents: state.isWaitingForStudents,
-    students: state.students,
-    firm: state.firm
-  };
-};
-export default connect(mapStateToProps)(results)
+const mapStateToProps = (state) => ({
+  highlightIndex: state.search.highlightIndex,
+  hasAutocompletes: state.search.text !== state.search.firm,
+  isWaitingForStudents: state.search.isWaitingForStudents,
+  students: state.search.students,
+  firm: state.search.firm
+});
+const mapDispatchToProps = (dispatch) => ({
+  toRegister: () => dispatch(push('register'))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(results)
