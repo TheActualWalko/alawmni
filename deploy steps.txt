@@ -1,0 +1,22 @@
+- add site spec to /etc/apache2/sites-available 
+
+Example:
+<VirtualHost *:80>
+  ServerName alumni.kcllawsociety.com                            <--- actual url users will use
+  ServerAlias folks.kcllawsociety.com                            <--- probably not using this. could be useful for supporting www.asdf.com & asdf.com (see sam-watkinson.com for reference)
+  DocumentRoot /var/www/alawmni/public/                          <--- path to dir containing index.php (this is always the same)
+  ErrorLog /var/log/kcllawsociety/error.log                      <--- error log
+  CustomLog /var/log/kcllawsociety/requests.log combined         <--- request log
+</VirtualHost>
+
+- set up dir for new client in /var/log/
+- touch error.log and requests.log in new log dir
+- symlink site spec to /etc/apache2/sites-enabled
+
+- TODO: DB steps
+- TODO: asset steps
+
+- non-automatable: update client DNS settings to point to us:
+  IPv4:    51.255.193.170
+  IPv6:    2001:41d0:0302:2100:0000:0000:0000:95c6
+  Gateway: 2001:41d0:0302:2100:0000:0000:0000:0001
