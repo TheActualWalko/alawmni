@@ -1,5 +1,7 @@
+import {ClientStatics} from './client-statics';
 
 declare var firms: string[];
+declare var statics: ClientStatics;
 
 import reduxThunk from './redux-thunk';
 import {createStore, applyMiddleware} from 'redux';
@@ -58,6 +60,8 @@ const reducer = (
 
 const store = applyMiddleware(reduxThunk)(createStore)(reducer);
 
+const titleElement: any = document.querySelector('title');
+titleElement.innerText = statics.docTitle;
 
 window.addEventListener('keydown', (event)=>{
   if(event.key === 'ArrowDown'){
