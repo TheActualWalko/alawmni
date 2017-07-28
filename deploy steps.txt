@@ -4,7 +4,7 @@ Example:
 <VirtualHost *:80>
   ServerName alumni.kcllawsociety.com                            <--- actual url users will use
   ServerAlias folks.kcllawsociety.com                            <--- probably not using this. could be useful for supporting www.asdf.com & asdf.com (see sam-watkinson.com for reference)
-  DocumentRoot /var/www/alawmni/public/                          <--- path to dir containing index.php (this is always the same)
+  DocumentRoot /var/www/public/                                  <--- path to dir containing index.php (this is always the same)
   ErrorLog /var/log/kcllawsociety/error.log                      <--- error log
   CustomLog /var/log/kcllawsociety/requests.log combined         <--- request log
 </VirtualHost>
