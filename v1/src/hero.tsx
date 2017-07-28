@@ -1,5 +1,5 @@
-import React = require("react");
-export default ()=>(
+import React = require('react');
+export default () => (
   <header className="main-header">
     <h1>
       <span>Alumni</span><br />

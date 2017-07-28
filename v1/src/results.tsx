@@ -1,14 +1,14 @@
-import { connect } from "react-redux";
-import React = require("react");
+import {connect} from 'react-redux';
+import React = require('react');
 
-const results = ( { students, firm, isWaitingForStudents, hasAutocompletes, highlightIndex } )=>{
+const results = ({students, firm, isWaitingForStudents, hasAutocompletes, highlightIndex})=>{
   return (
     <ul className="results">
-      { isWaitingForStudents && <li className="loading">loading...</li> }
+      {isWaitingForStudents && <li className="loading">loading...</li> }
       { 
-        students.map( (s, i)=>{
+        students.map((s, i)=>{
           return (
-            <li key={i} className={`student ${(!hasAutocompletes && highlightIndex === i) && "active"}`}>
+            <li key={i} className={`student ${(!hasAutocompletes && highlightIndex === i) && 'active'}`}>
               <a href={`mailto:${s.email}`}>
                 <h3><strong>{s.name}</strong> knows about <em>{firm.name}</em></h3>
                 <h4>
@@ -32,13 +32,13 @@ const results = ( { students, firm, isWaitingForStudents, hasAutocompletes, high
 };
 
 
-const mapStateToProps = ( state )=>{
+const mapStateToProps = (state)=>{
   return {
-    highlightIndex : state.highlightIndex,
-    hasAutocompletes : state.text !== state.firm,
-    isWaitingForStudents : state.isWaitingForStudents,
-    students : state.students,
-    firm : state.firm
+    highlightIndex: state.highlightIndex,
+    hasAutocompletes: state.text !== state.firm,
+    isWaitingForStudents: state.isWaitingForStudents,
+    students: state.students,
+    firm: state.firm
   };
 };
-export default connect( mapStateToProps )( results )
+export default connect(mapStateToProps)(results)

@@ -1,5 +1,5 @@
-import React = require("react");
-import getAutocompletes from "./get-autocompletes";
+import React = require('react');
+import getAutocompletes from './get-autocompletes';
 
 export default ({ 
   data, 
@@ -7,14 +7,14 @@ export default ({
   text, 
   selected,
   highlightIndex, 
-  onChange, 
+  onChange,
   onSelect
-})=>{
+}) => {
   let autocompletes : any[];
-  if( text === "" || selected === undefined || text === selected.name ){
+  if (text === '' || selected === undefined || text === selected.name) {
     autocompletes = [];
   }else{
-    autocompletes = getAutocompletes( data, text )
+    autocompletes = getAutocompletes(data, text)
   }
   return (
     <div className="autocomplete-input">
@@ -25,22 +25,22 @@ export default ({
         placeholder="Type here" 
         value={text}
         autoComplete="off"
-        onChange={( e )=>{
-          const input : any = e.nativeEvent.target;
-          onChange( input.value );
+        onChange={(e) => {
+          const input: any = e.nativeEvent.target;
+          onChange(input.value);
         }}
       />
-      { autocompletes.length > 0 && <ul>
-        { autocompletes.map( (a,i)=>
+      {autocompletes.length > 0 && <ul>
+        {autocompletes.map((a,i) =>
           <li 
             className={highlightIndex === i && "active" || ""} 
             key={i} 
-            onClick={()=>onSelect(a)}
+            onClick={() => onSelect(a)}
           >
             {a.name}
           </li> 
         )}
-      </ul> }
+      </ul>}
     </div>
   );
 }

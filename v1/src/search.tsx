@@ -1,24 +1,24 @@
 declare var firms : string[];
 
-import { connect } from "react-redux";
-import { updateText, selectFirm } from "./actions";
+import {connect} from 'react-redux';
+import {updateText, selectFirm} from './actions';
 
-import React = require("react");
+import React = require('react');
 
-import AutocompleteInput from "./autocomplete-input";
+import AutocompleteInput from './autocomplete-input';
 
 interface searchProps {
-  text    : string
-  selected : string
-  hasText : boolean
-  autocompletes : string[]
-  highlightIndex : number
-  isWaitingForStudents : boolean
-  updateText : ( string )=>void
-  selectFirm : ( string )=>void
+  text: string
+  selected: string
+  hasText: boolean
+  autocompletes: string[]
+  highlightIndex: number
+  isWaitingForStudents: boolean
+  updateText: (string) => void
+  selectFirm: (string) => void
 };
 
-const search = ( props : searchProps )=>{
+const search = (props: searchProps) => {
   const { 
     text, 
     selected, 
@@ -35,8 +35,8 @@ const search = ( props : searchProps )=>{
         text={text}
         data={firms}
         selected={selected}
-        onChange={t=>updateText(t)}
-        onSelect={f=>selectFirm(f)}
+        onChange={(t) => updateText(t)}
+        onSelect={(f) => selectFirm(f)}
         highlightIndex={highlightIndex}
       />
     </form>
@@ -44,23 +44,23 @@ const search = ( props : searchProps )=>{
 };
 
 
-const mapStateToProps = ( state )=>{
+const mapStateToProps = (state) => {
   return {
-    text : state.text,
-    selected : state.firm,
-    autocompletes : state.autocompletes,
-    isWaitingForStudents : state.isWaitingForStudents,
-    highlightIndex : state.highlightIndex,
-    hasText : state.text !== "" && state.text !== undefined 
+    text: state.text,
+    selected: state.firm,
+    autocompletes: state.autocompletes,
+    isWaitingForStudents: state.isWaitingForStudents,
+    highlightIndex: state.highlightIndex,
+    hasText: state.text !== '' && state.text !== undefined 
   };
 };
-const mapDispatchToProps = ( dispatch )=>{
+const mapDispatchToProps = (dispatch) => {
   return {
-    selectFirm : ( newFirm : any )=>{
-      dispatch( selectFirm( newFirm ) );
+    selectFirm: (newFirm: any) => {
+      dispatch(selectFirm(newFirm));
     },
-    updateText : ( newText : string )=>{
-      dispatch( updateText( newText ) );
+    updateText: (newText: string) => {
+      dispatch(updateText(newText));
     }
   };
 };
