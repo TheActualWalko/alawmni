@@ -6,14 +6,14 @@
 @import "compass/reset";
 @import "compass/css3";
 
-*{
+* {
   box-sizing:border-box;
 }
 
 $blue: #102C42;
 $green: #58B69E;
 
-html, body{
+html, body {
   background-image:url("../img/london.jpg");
   background-size:cover;
   background-position:50% 50%;
@@ -24,14 +24,14 @@ html, body{
   padding:0;
 }
 
-body{
+body {
   font-family:"Ropa Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing:antialiased;
   overflow:scroll;
   background-color:#222;
 }
 
-.background{
+.background {
   position:fixed;
   left:0;
   right:0;
@@ -43,42 +43,42 @@ body{
   background-position:50% 50%;
 }
 
-#react-container{
+#react-container {
   position:relative;
   z-index:2;
 }
 
-main{
+main {
   width:100%;
   height:100%;
   padding-bottom:20px;
 }
 
-.main-header{
+.main-header {
   color:white;
   width:640px;
   margin:60px auto 60px auto;
-  h1{
+  h1 {
     float:left;
   }
-  h1 span{
+  h1 span {
     display:inline-block;
     width:auto;
     background-color:$green;
     font-size:40px;
   }
-  h1 span{
+  h1 span {
     padding:12px 16px;
   }
-  h2{
+  h2 {
     float:right;
     margin-right:-23px;
   }
-  img{
+  img {
     width:400px;
     height:120px;
   }
-  &:after{
+  &:after {
     content:"";
     clear:both;
     width:100%;
@@ -86,33 +86,33 @@ main{
   }
 }
 
-.main-footer{
+.main-footer {
   padding:20px 0;
   color:white;
   left:0;
   right:0;
   width:auto;
-  p{
+  p {
     text-align:center;
     max-width:640px;
     margin:0 auto;
   }
-  a{
+  a {
     text-decoration: underline;
     color:inherit;
   }
 }
 
-.autocomplete-input{
+.input {
   width:100%;
-  label{
+  label {
     color:white;
     display:block;
     font-size:32px;
     margin-bottom:15px;
     font-weight:200;
   }
-  input{
+  input {
     color:$green;
     background-color:white;
     border:none;
@@ -121,31 +121,57 @@ main{
     font-size:22px;
     width:100%;
   }
-  ul{
-    background-color:white;
-    color:$blue;
-    max-height:483px;
-    overflow:scroll;
-    li{
-      padding:12px 16px;
-      font-size:22px;
-      &:hover, &.active{
-        background-color:$green;
-        color:white;
-        cursor:pointer;
-      }
+}
+
+.autocomplete-input ul {
+  background-color:white;
+  color:$blue;
+  max-height:483px;
+  overflow:scroll;
+  li {
+    padding:12px 16px;
+    font-size:22px;
+    &:hover, &.active {
+      background-color:$green;
+      color:white;
+      cursor:pointer;
     }
   }
 }
 
-.search, .results{
+.search, .results, .register {
    width:600px;
    margin:0 auto;
    position:relative;
    z-index:2;
 }
 
-.results .loading{
+.register .input {
+  margin-bottom: 20px;
+}
+
+.submit {
+  width: 100%;
+  padding: 15px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 32px;
+  background-color:$blue;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  &:hover {
+    background-color:lighten($blue, 10%);
+    cursor: pointer;
+  }
+  &.disabled, &.disabled:hover {
+    background-color: $blue;
+    color: rgba(white, 0.35);
+    cursor: default;
+  }
+}
+
+.results .loading {
   background-color:rgba($blue, 0.5);
   margin-top:10px;
   color:white;
@@ -155,58 +181,58 @@ main{
   font-style:italic;
 }
 
-.results .student{
+.results .student {
   background-color:$blue;
   color:white;
   margin-top:10px;
   width:100%;
-  &:hover, &.active{
+  &:hover, &.active {
     cursor:pointer;
     background-color:lighten($blue, 10%);
   }
-  a{
+  a {
     display:block;
     padding:20px 30px;
     text-decoration:none;
     color:white;
   }
-  h3{
+  h3 {
     font-size:30px;
     margin-bottom:14px;
   }
-  h4{
+  h4 {
     font-size:22px;
-    img{
+    img {
       width:24px;
       height:auto;
       vertical-align:middle;
       margin-right:5px;
     }
   }
-  strong, em{
+  strong, em {
     text-transform: uppercase;
     font-weight:bold;
   }
-  strong{
+  strong {
     color:$green;
   }
 }
 
-@media screen and (max-width:680px){
-  main{
+@media screen and (max-width:680px) {
+  main {
     padding:40px;
   }
-  .main-header{
+  .main-header {
     margin-top:0;
     margin-bottom:20px;
   }
-  .main-header, .search, .results{
+  .main-header, .search, .results, .register {
     width:100%
   }
 }
 
-@media screen and (max-width:650px){
-  .main-header h2{
+@media screen and (max-width:650px) {
+  .main-header h2 {
     display:block;
     width:100%;
     margin-right:0;
@@ -216,45 +242,45 @@ main{
   }
 }
 
-@media screen and (max-width:540px){
-  .main-footer p{
+@media screen and (max-width:540px) {
+  .main-footer p {
     max-width:315px;
     margin-top: 8px;
   }
 }
 
-@media screen and (max-width:440px){
-  main{
+@media screen and (max-width:440px) {
+  main {
     padding:20px;
   }
-  .main-header h2{
-    img{
+  .main-header h2 {
+    img {
       width:260px;
       height:80px
     }
   }
-  .autocomplete-input{
-    label{
+  .input {
+    label {
       font-size:24px;
       margin-bottom:5px;
     }
-    input{
+    input {
       padding:12px 16px;
       font-size:18px;
     }
-    ul li{
-      font-size:18px;
-    }
   }
-  .results .student{
-    a{
+  .autocomplete-input ul li {
+    font-size:18px;
+  }
+  .results .student {
+    a {
       padding:10px;
     }
-    h3{
+    h3 {
       font-size:22px;
       margin-bottom:8px;
     }
-    h4{
+    h4 {
       font-size:16px;
     }
   }

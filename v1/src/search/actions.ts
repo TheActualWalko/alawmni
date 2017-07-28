@@ -1,14 +1,14 @@
 import $ = require('jquery');
 
-export const UPDATE_TEXT = 'UPDATE_TEXT';
-export const updateText = (text: string)=>{
+export const UPDATE_SEARCH = 'alawmni/search/UPDATE_SEARCH';
+export const updateSearch = (text: string)=>{
   return {
-    type: UPDATE_TEXT,
+    type: UPDATE_SEARCH,
     text
   };
 }
 
-export const SELECT_FIRM = 'SELECT_FIRM';
+export const SELECT_FIRM = 'alawmni/search/SELECT_FIRM';
 export const selectFirm = (firm: any)=>{
   return (dispatch, getState)=>{
     dispatch({
@@ -23,7 +23,8 @@ export const selectFirm = (firm: any)=>{
   };
 }
 
-export const RECEIVE_STUDENTS = 'RECEIVE_STUDENTS';
+
+export const RECEIVE_STUDENTS = 'alawmni/search/RECEIVE_STUDENTS';
 export const receiveStudents = (students: any[])=>{
   return {
     type: RECEIVE_STUDENTS,
@@ -31,7 +32,7 @@ export const receiveStudents = (students: any[])=>{
   };
 }
 
-export const MOVE_HIGHLIGHT_INDEX = 'MOVE_HIGHLIGHT_INDEX';
+export const MOVE_HIGHLIGHT_INDEX = 'alawmni/search/MOVE_HIGHLIGHT_INDEX';
 export const moveHighlightIndex = (amount: number)=>{
   return {
     type: MOVE_HIGHLIGHT_INDEX,

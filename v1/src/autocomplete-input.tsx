@@ -1,7 +1,9 @@
 import React = require('react');
 import getAutocompletes from './get-autocompletes';
+import Input from './input';
 
 export default ({ 
+  id,
   data, 
   label, 
   text, 
@@ -11,25 +13,19 @@ export default ({
   onSelect
 }) => {
   let autocompletes : any[];
-  if (text === '' || selected === undefined || text === selected.name) {
+  if (text === '' || selected && text === selected.name) {
     autocompletes = [];
   }else{
     autocompletes = getAutocompletes(data, text)
   }
   return (
-    <div className="autocomplete-input">
-      <label htmlFor="labelled-input">{label}</label>
-      <input 
-        type="text"
-        id="labelled-input" 
-        placeholder="Type here" 
-        value={text}
-        autoComplete="off"
-        onChange={(e) => {
-          const input: any = e.nativeEvent.target;
-          onChange(input.value);
-        }}
-      />
+    <Input
+      id={id}
+      label={label}
+      text={text}
+      onChange={onChange}
+      className="input autocomplete-input"
+    >
       {autocompletes.length > 0 && <ul>
         {autocompletes.map((a,i) =>
           <li 
@@ -41,6 +37,6 @@ export default ({
           </li> 
         )}
       </ul>}
-    </div>
+    </Input>
   );
 }
