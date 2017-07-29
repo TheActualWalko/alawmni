@@ -40,7 +40,7 @@ const Register = ({
         className={`submit ${submittable ? '' : 'disabled'}`} 
         disabled={!submittable}
         onClick={(e)=>{ 
-          register(email, firstName, lastName, firm.id); 
+          register(email.trim(), firstName.trim(), lastName.trim(), firmName.trim()); 
           e.preventDefault(); 
           e.stopPropagation(); 
           return false; 

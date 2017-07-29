@@ -51,15 +51,15 @@ export const moveHighlightIndex = (amount: number)=>{
   };
 }
 
-export const register = (email, firstName, lastName, firmID)=>{
+export const register = (email, firstName, lastName, firm)=>{
   return (dispatch, getState) => {
     $.post(
       '/register.php', 
-      { email, firstName, lastName, firmID }, 
+      { email, firstName, lastName, firm }, 
       (result)=>{
         if (result === 'success') {
           alert('Registered successfully!');
-          dispatch(push(''))
+          window.location.href = '/';
         } else {
           alert('There was an error: ' + result);
         }

@@ -11,7 +11,7 @@
 
   $domain = $_SERVER["HTTP_HOST"];
   if (strpos($domain, "localhost") !== false || strpos($domain, "51.255.193.170") !== false) {
-    $domain = $_COOKIE["domain"];
+    $domain = 'alumni.kcllawsociety.com'; //$domain = $_COOKIE["domain"];
   } else {
     $mysqli->query("INSERT INTO accesses () VALUES ();");
   }

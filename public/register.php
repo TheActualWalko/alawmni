@@ -11,14 +11,14 @@
 
   $domain = $_SERVER["HTTP_HOST"];
   if (strpos($domain, "localhost") !== false || strpos($domain, "51.255.193.170") !== false) {
-    $domain = $_COOKIE["domain"];
+    $domain = 'alumni.kcllawsociety.com'; //$domain = 'alumni.kcllawsociety.com'; //$domain = $_COOKIE["domain"];
   } else {
     $mysqli->query("INSERT INTO accesses () VALUES ();");
   }
 
   $email = $_POST["email"];
   $name = $_POST["firstName"] . " " . $_POST["lastName"];
-  $firmID = $_POST["firmID"];
+  $firm = $_POST["firm"];
 
   // echo $email . ", " . $name . ", " . $firm;
   $addStudentStmt = $mysqli->prepare("
@@ -38,15 +38,25 @@
   $addStudentStmt->bind_param('ssssss', $name, $email, $domain, $name, $email, $domain);
   $addStudentStmt->execute();
 
+  $addFirmStmt = $mysqli->prepare("
+    INSERT INTO companies (
+      name
+    ) VALUES (
+      ?
+    ) ON DUPLICATE KEY UPDATE name = ?;
+  ");
+  $addFirmStmt->bind_param('ss', $firm, $firm);
+  $addFirmStmt->execute();
+
   $connectCompanyStmt = $mysqli->prepare("
     INSERT INTO student_companies (
       student_id, 
       company_id
     ) VALUES (
       (SELECT id FROM students WHERE email = ?),
-      ?
+      (SELECT id FROM companies WHERE name = ?)
     );");
-  $connectCompanyStmt->bind_param('si', $email, $firmID);
+  $connectCompanyStmt->bind_param('ss', $email, $firm);
   $connectCompanyStmt->execute();
   $mysqli->close();
 

@@ -13,8 +13,8 @@ export const email = createRegisterSelector('email', '');
 export const highlightIndex = createRegisterSelector('highlightIndex', -1);
 
 export const submittable = createSelector(
-  [firm, firstName, lastName, email],
-  (firm, firstName, lastName, email) => !!firm && !!firstName && !!lastName && !!email
+  [highlightIndex, firmName, firstName, lastName, email],
+  (highlightIndex, firmName, firstName, lastName, email) => highlightIndex === -1 && !!firmName && !!firstName && !!lastName && !!email
 );
 
 export const getAll = createStructuredSelector({
