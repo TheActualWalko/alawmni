@@ -12,11 +12,10 @@ import history from './history';
 const reducer = combineReducers({
   search, 
   register,
-  routing
+  routing,
+  statics: (state, action) => statics
 });
 
 const store = applyMiddleware(reduxThunk, routerMiddleware(history))(createStore)(reducer, undefined);
-const titleElement: any = document.querySelector('title');
-titleElement.innerText = statics.docTitle;
 
 export default store;

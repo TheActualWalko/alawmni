@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import React = require('react');
 
-const results = ({students, firm, isWaitingForStudents, hasAutocompletes, highlightIndex, toRegister})=>{
+const results = ({students, firm, contactEmail, isWaitingForStudents, hasAutocompletes, highlightIndex, toRegister})=>{
   return (
     <ul className="results">
       {isWaitingForStudents && <li className="loading">loading...</li> }
@@ -25,7 +25,7 @@ const results = ({students, firm, isWaitingForStudents, hasAutocompletes, highli
           If you would like to be a part of this database please <a onClick={toRegister}>click here to sign up.</a>
         </p>
         <p>
-          Email <a href="mailto:kcllsgeneral@gmail.com" target="_blank">kcllsgeneral@gmail.com</a> for any questions.
+          Email <a href={`mailto:${contactEmail}`} target="_blank">{contactEmail}</a> for any questions.
         </p>
       </li>
     </ul>
@@ -38,7 +38,8 @@ const mapStateToProps = (state) => ({
   hasAutocompletes: state.search.text !== state.search.firm,
   isWaitingForStudents: state.search.isWaitingForStudents,
   students: state.search.students,
-  firm: state.search.firm
+  firm: state.search.firm,
+  contactEmail: state.statics.contactEmail
 });
 const mapDispatchToProps = (dispatch) => ({
   toRegister: () => dispatch(push('register'))

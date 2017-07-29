@@ -1,5 +1,5 @@
 <?php
-  $mysqli = new mysqli('127.0.0.1', 'root', $_SERVER["MYSQL_PASSWORD"], 'kcl_students');
+  $mysqli = new mysqli($_SERVER["MYSQL_HOST"], $_SERVER["MYSQL_USERNAME"], $_SERVER["MYSQL_PASSWORD"], 'alumni_db');
   $mysqli->set_charset("utf8");
   if ($mysqli->connect_errno) {
     echo "Sorry, this website is experiencing problems.";
@@ -8,17 +8,35 @@
     echo "Error: " . $mysqli->connect_error . "\n";
     exit;
   }
+
+  $domain = $_SERVER["HTTP_HOST"];
+  if (strpos($domain, "localhost") !== false) {
+    $domain = urldecode($_COOKIE["domain"]);
+  } else {
+    $mysqli->query("INSERT INTO accesses () VALUES ();");
+  }
+
   $email = $_POST["email"];
   $name = $_POST["firstName"] . " " . $_POST["lastName"];
   $firm = $_POST["firmID"];
 
-  $addStudentStmt = $mysqli->prepare("INSERT INTO kcl_students.students (name, email) VALUES (?, ?);");
-  $addStudentStmt->bind_param('ss', $name, $email);
-  //$addStudentStmt->execute();
+  $addStudentStmt = $mysqli->prepare("
+    INSERT INTO students (
+      name, 
+      email, 
+      client_id
+    ) VALUES (
+      ?, 
+      ?, 
+      (SELECT id FROM clients WHERE domain = ?)
+    );
+  ");
+  $addStudentStmt->bind_param('sss', $name, $email, $domain);
+  $addStudentStmt->execute();
 
   // get LAST_INSERT_ID here
 
-  $connectCompanyStmt = $mysqli->prepare("INSERT INTO kcl_students.student_companies (student_id, company_id) VALUES (?, ?);");
+  $connectCompanyStmt = $mysqli->prepare("INSERT INTO student_companies (student_id, company_id) VALUES (?, ?);");
   $connectCompanyStmt->bind_param('ii', $studentID, $firmID);
   //$connectCompanyStmt->execute();
   $mysqli->close();

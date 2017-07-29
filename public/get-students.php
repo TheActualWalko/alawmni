@@ -1,5 +1,5 @@
 <?php
-  $mysqli = new mysqli('127.0.0.1', 'root', $_SERVER["MYSQL_PASSWORD"], 'kcl_students');
+  $mysqli = new mysqli($_SERVER["MYSQL_HOST"], $_SERVER["MYSQL_USERNAME"], $_SERVER["MYSQL_PASSWORD"], 'alumni_db');
   $mysqli->set_charset("utf8");
   if ($mysqli->connect_errno) {
     echo "Sorry, this website is experiencing problems.";
@@ -8,9 +8,31 @@
     echo "Error: " . $mysqli->connect_error . "\n";
     exit;
   }
+
+  $domain = $_SERVER["HTTP_HOST"];
+  if (strpos($domain, "localhost") !== false) {
+    $domain = urldecode($_COOKIE["domain"]);
+  } else {
+    $mysqli->query("INSERT INTO accesses () VALUES ();");
+  }
+
   $firmID = urldecode($_GET["firm"]);
-  $stmt = $mysqli->prepare("SELECT name, email FROM kcl_students.students WHERE id IN ( SELECT student_id FROM kcl_students.student_companies WHERE company_id IN ( SELECT id FROM kcl_students.companies WHERE id = ? ));");
-  $stmt->bind_param('i', $firmID);
+  $stmt = $mysqli->prepare("
+    SELECT name, email 
+    FROM students 
+    WHERE id IN (
+      SELECT student_id 
+      FROM student_companies 
+      WHERE company_id = ?
+    )
+    AND client_id IN (
+      SELECT id 
+      FROM clients 
+      WHERE domain = ?
+    );
+  ");
+  
+  $stmt->bind_param('is', $firmID, $domain);
   $stmt->execute();
   $stmt->bind_result($studentName, $studentEmail);
   $isFirst = true;
