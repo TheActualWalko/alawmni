@@ -17,7 +17,6 @@ export const selectFirm = (firm: any)=>{
     });
     $.get('/get-students.php', {firm: firm.id}, (result)=>{
       const students = JSON.parse(result);
-      console.log(students);
       dispatch(receiveStudents(students));
     });
   };

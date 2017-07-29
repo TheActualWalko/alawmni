@@ -18,8 +18,9 @@
 
   $email = $_POST["email"];
   $name = $_POST["firstName"] . " " . $_POST["lastName"];
-  $firm = $_POST["firmID"];
+  $firmID = $_POST["firmID"];
 
+  // echo $email . ", " . $name . ", " . $firm;
   $addStudentStmt = $mysqli->prepare("
     INSERT INTO students (
       name, 
@@ -29,15 +30,25 @@
       ?, 
       ?, 
       (SELECT id FROM clients WHERE domain = ?)
-    );
+    ) ON DUPLICATE KEY UPDATE
+      name = ?,
+      email = ?,
+      client_id = (SELECT id FROM clients WHERE domain = ?);
   ");
-  $addStudentStmt->bind_param('sss', $name, $email, $domain);
+  $addStudentStmt->bind_param('ssssss', $name, $email, $domain, $name, $email, $domain);
   $addStudentStmt->execute();
 
-  // get LAST_INSERT_ID here
-
-  $connectCompanyStmt = $mysqli->prepare("INSERT INTO student_companies (student_id, company_id) VALUES (?, ?);");
-  $connectCompanyStmt->bind_param('ii', $studentID, $firmID);
-  //$connectCompanyStmt->execute();
+  $connectCompanyStmt = $mysqli->prepare("
+    INSERT INTO student_companies (
+      student_id, 
+      company_id
+    ) VALUES (
+      (SELECT id FROM students WHERE email = ?),
+      ?
+    );");
+  $connectCompanyStmt->bind_param('si', $email, $firmID);
+  $connectCompanyStmt->execute();
   $mysqli->close();
+
+  echo "success";
 ?>

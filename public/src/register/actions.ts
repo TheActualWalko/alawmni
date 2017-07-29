@@ -1,3 +1,6 @@
+import $ = require('jquery');
+import {push} from 'react-router-redux';
+
 export const UPDATE_FIRM_NAME = 'alawmni/register/UPDATE_FIRM_NAME';
 export const updateFirmName = (text: string)=>{
   return {
@@ -46,4 +49,21 @@ export const moveHighlightIndex = (amount: number)=>{
     type: MOVE_HIGHLIGHT_INDEX,
     amount
   };
+}
+
+export const register = (email, firstName, lastName, firmID)=>{
+  return (dispatch, getState) => {
+    $.post(
+      '/register.php', 
+      { email, firstName, lastName, firmID }, 
+      (result)=>{
+        if (result === 'success') {
+          alert('Registered successfully!');
+          dispatch(push(''))
+        } else {
+          alert('There was an error: ' + result);
+        }
+      }
+    );
+  }
 }

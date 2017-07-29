@@ -10,13 +10,15 @@ import {
   updateFirstName,
   updateLastName,
   updateEmail,
-  selectFirm
+  selectFirm,
+  register
 } from './register/actions';
 import {connect} from 'react-redux';
 
 const Register = ({
   firstName, lastName, email, firmName, firm, highlightIndex, submittable,
-  updateFirstName, updateLastName, updateEmail, updateFirmName, selectFirm
+  updateFirstName, updateLastName, updateEmail, updateFirmName, selectFirm,
+  register
 }) => (
   <div>
     <Hero />
@@ -34,7 +36,18 @@ const Register = ({
         onSelect={selectFirm}
         highlightIndex={highlightIndex}
       />
-      <button className={`submit ${submittable ? '' : 'disabled'}`}>Confirm</button>
+      <button 
+        className={`submit ${submittable ? '' : 'disabled'}`} 
+        disabled={!submittable}
+        onClick={(e)=>{ 
+          register(email, firstName, lastName, firm.id); 
+          e.preventDefault(); 
+          e.stopPropagation(); 
+          return false; 
+        }}
+       >
+         Confirm
+       </button>
     </form>
   </div>
 );
@@ -45,7 +58,8 @@ const mapDispatchToProps = {
   updateFirstName,
   updateLastName,
   updateEmail,
-  selectFirm
+  selectFirm,
+  register
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
