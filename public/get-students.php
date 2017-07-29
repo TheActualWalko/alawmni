@@ -10,8 +10,8 @@
   }
 
   $domain = $_SERVER["HTTP_HOST"];
-  if (strpos($domain, "localhost") !== false) {
-    $domain = urldecode($_COOKIE["domain"]);
+  if (strpos($domain, "localhost") !== false || strpos($domain, "51.255.193.170") !== false) {
+    $domain = $_COOKIE["domain"];
   } else {
     $mysqli->query("INSERT INTO accesses () VALUES ();");
   }

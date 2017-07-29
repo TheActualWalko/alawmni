@@ -1,33 +1,31 @@
+<?php
+  $mysqli = new mysqli($_SERVER["MYSQL_HOST"], $_SERVER["MYSQL_USERNAME"], $_SERVER["MYSQL_PASSWORD"], "alumni_db");
+  $mysqli->set_charset("utf8");
+  if ($mysqli->connect_errno) {
+    echo "Sorry, this website is experiencing problems.";
+    echo "Error: Failed to make a MySQL connection, here is why: \n";
+    echo "Errno: " . $mysqli->connect_errno . "\n";
+    echo "Error: " . $mysqli->connect_error . "\n";
+    exit;
+  }
+
+  $domain = $_SERVER["HTTP_HOST"];
+  if (strpos($domain, "localhost") !== false || strpos($domain, "51.255.193.170") !== false) {
+    $domain = $_COOKIE["domain"];
+  } else {
+    $mysqli->query("INSERT INTO accesses () VALUES ();");
+  }
+
+  $stmt = $mysqli->prepare("SELECT id, app_display_name, contact_email, client_website FROM clients WHERE domain = ?;");
+  $stmt->bind_param("s", $domain);
+  $stmt->execute();
+  $stmt->bind_result($clientID, $appDisplayName, $contactEmail, $clientWebsite);
+  $stmt->fetch();
+  $stmt->close();
+?>
 <!DOCTYPE html>
 <html>
   <head>
-    <?php
-      $mysqli = new mysqli($_SERVER["MYSQL_HOST"], $_SERVER["MYSQL_USERNAME"], $_SERVER["MYSQL_PASSWORD"], "alumni_db");
-      $mysqli->set_charset("utf8");
-      if ($mysqli->connect_errno) {
-        echo "<script>console.log(`";
-        echo "Sorry, this website is experiencing problems.";
-        echo "Error: Failed to make a MySQL connection, here is why: \n";
-        echo "Errno: " . $mysqli->connect_errno . "\n";
-        echo "Error: " . $mysqli->connect_error . "\n";
-        echo "`);</script>";
-        exit;
-      }
-
-      $domain = $_SERVER["HTTP_HOST"];
-      if (strpos($domain, "localhost") !== false) {
-        $domain = urldecode($_COOKIE["domain"]);
-      } else {
-        $mysqli->query("INSERT INTO accesses () VALUES ();");
-      }
-
-      $stmt = $mysqli->prepare("SELECT id, app_display_name, contact_email, client_website FROM clients WHERE domain = ?;");
-      $stmt->bind_param("s", $domain);
-      $stmt->execute();
-      $stmt->bind_result($clientID, $appDisplayName, $contactEmail, $clientWebsite);
-      $stmt->fetch();
-      $stmt->close();
-    ?>
     <title><?php echo $appDisplayName; ?></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -31,6 +31,10 @@ body {
   background-color:#222;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 .background {
   position:fixed;
   left:0;
@@ -99,7 +103,7 @@ main {
   }
   a {
     text-decoration: underline;
-    color:inherit;
+    color: inherit;
   }
 }
 

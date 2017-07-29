@@ -1,0 +1,2 @@
+#!/bin/bash
+./deploy-php.sh && ./deploy-css.sh && scp -r {package.json,package-lock.json,tsconfig.json,dist.webpack.config.js,build.sh,src,img} root@51.255.193.170:/var/www/ && ssh root@51.255.193.170 'cd /var/www/ && npm i && ./build.sh';
