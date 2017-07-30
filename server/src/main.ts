@@ -15,10 +15,10 @@ const db = mysql.createConnection({
 });
 
 const getDomain = (req)=>{
-  if (req.headers['host'].includes('localhost')) {
+  if (req.headers['host'].includes('localhost') || req.headers['host'].includes('51.255.193.170')) {
     return req.cookies['domain'];
   } else {
-    return req.headers['host'];
+    return req.headers['host'].split(':')[0];
   }
 };
 
