@@ -1,2 +1,2 @@
 #!/bin/bash
-node_modules/.bin/tsc --rootDir src --outDir dist
+node_modules/.bin/tsc --outDir dist

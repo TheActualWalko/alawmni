@@ -15,7 +15,7 @@ export const selectFirm = (firm: any)=>{
       type: SELECT_FIRM,
       firm
     });
-    $.get('/get-students.php', {firm: firm.id}, (result)=>{
+    $.get(`/company/${firm.id}/students`, (result)=>{
       const students = JSON.parse(result);
       dispatch(receiveStudents(students));
     });

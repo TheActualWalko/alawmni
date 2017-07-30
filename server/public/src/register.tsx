@@ -24,7 +24,12 @@ const Register = ({
     <Hero />
     <form className="register" onSubmit={(e)=>{ 
       if (submittable) {
-        register(email.trim(), firstName.trim(), lastName.trim(), firmName.trim()); 
+        register(
+          email.trim(), 
+          firstName.trim(), 
+          lastName.trim(), 
+          firmName.trim()
+        ); 
       }
       e.preventDefault(); 
       e.stopPropagation(); 

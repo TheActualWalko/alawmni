@@ -1,2 +1,2 @@
 #!/bin/bash
-./build.sh && node dist/main.js
+./build.sh && node_modules/.bin/forever restart dist/main.js

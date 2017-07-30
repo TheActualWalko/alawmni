@@ -51,11 +51,11 @@ export const moveHighlightIndex = (amount: number)=>{
   };
 }
 
-export const register = (email, firstName, lastName, firm)=>{
+export const register = (email, firstName, lastName, companyName)=>{
   return (dispatch, getState) => {
     $.post(
-      '/register.php', 
-      { email, firstName, lastName, firm }, 
+      '/register', 
+      { email, firstName, lastName, companyName }, 
       (result)=>{
         if (result === 'success') {
           alert('Registered successfully!');
