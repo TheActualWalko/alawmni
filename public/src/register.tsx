@@ -22,10 +22,17 @@ const Register = ({
 }) => (
   <div>
     <Hero />
-    <form className="register">
+    <form className="register" onSubmit={(e)=>{ 
+      if (submittable) {
+        register(email.trim(), firstName.trim(), lastName.trim(), firmName.trim()); 
+      }
+      e.preventDefault(); 
+      e.stopPropagation(); 
+      return false;
+    }}>
       <Input text={firstName} id="first-name-input" label="Enter your first name:" onChange={updateFirstName}/>
       <Input text={lastName} id="last-name-input" label="Enter your last name:" onChange={updateLastName}/>
-      <Input text={email} id="email-input" email label="Enter your email:" onChange={updateEmail}/>
+      <Input text={email} email id="email-input" label="Enter your email:" onChange={updateEmail}/>
       <AutocompleteInput
         id="firm-input"
         label="Name of firm in which you have insight:"
@@ -36,18 +43,12 @@ const Register = ({
         onSelect={selectFirm}
         highlightIndex={highlightIndex}
       />
-      <button 
+      <input 
         className={`submit ${submittable ? '' : 'disabled'}`} 
         disabled={!submittable}
-        onClick={(e)=>{ 
-          register(email.trim(), firstName.trim(), lastName.trim(), firmName.trim()); 
-          e.preventDefault(); 
-          e.stopPropagation(); 
-          return false; 
-        }}
-       >
-         Confirm
-       </button>
+        type="submit"
+        title="Confirm"
+      />
     </form>
   </div>
 );

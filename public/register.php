@@ -16,6 +16,23 @@
     $mysqli->query("INSERT INTO accesses () VALUES ();");
   }
 
+  if ($_POST["email"] == '') {
+    echo "missing required field 'email'";
+    exit;
+  }
+  if ($_POST["firstName"] == '') {
+    echo "missing required field 'firstName'";
+    exit;
+  }
+  if ($_POST["lastName"] == '') {
+    echo "missing required field 'lastName'";
+    exit;
+  }
+  if ($_POST["firm"] == '') {
+    echo "missing required field 'firm'";
+    exit;
+  }
+  
   $email = $_POST["email"];
   $name = $_POST["firstName"] . " " . $_POST["lastName"];
   $firm = $_POST["firm"];
