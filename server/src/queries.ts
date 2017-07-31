@@ -24,13 +24,27 @@ export const getCompanies = () => many(
 );
 
 export const getClient = (domain) => one(
-  `SELECT id, app_display_name, contact_email, client_website FROM clients WHERE domain = ?;`,
+  `
+    SELECT 
+      id, 
+      app_display_name, 
+      contact_email, 
+      client_website,
+      primary_color,
+      secondary_color
+    FROM 
+      clients 
+    WHERE 
+      domain = ?;
+   `,
   [domain],
-  ({id, app_display_name, contact_email, client_website}) => ({
+  ({id, app_display_name, contact_email, client_website, primary_color, secondary_color}) => ({
     id,
     appDisplayName: app_display_name,
     contactEmail: contact_email,
-    clientWebsite: client_website
+    clientWebsite: client_website,
+    primaryColor: primary_color,
+    secondaryColor: secondary_color
   })
 );
 

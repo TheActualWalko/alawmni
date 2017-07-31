@@ -4,12 +4,23 @@ import * as fs from 'fs';
 import * as url from 'url';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
+import * as path from 'path';
+
 import getClientDomain from './get-client-domain';
 import bindApiCalls from './bind-api-calls';
 import sendIndex from './send-index';
 import {getClientSlug} from './queries';
 
-const {MYSQL_HOST, MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_DB, PORT = 80} = JSON.parse(fs.readFileSync('.apiConfig', 'utf8'));
+const {
+  MYSQL_HOST, 
+  MYSQL_USERNAME, 
+  MYSQL_PASSWORD, 
+  MYSQL_DB, 
+  PORT,
+  STATIC_DIR
+} = JSON.parse(fs.readFileSync('.apiConfig', 'utf8'));
+
+const staticDir = path.resolve(STATIC_DIR);
 
 const app = express();
 const db = mysql.createConnection({
@@ -27,11 +38,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 bindApiCalls(app, db);
 
 app.get('/img/logo.png', (req, res) => {
-  getClientSlug(req['clientDomain'])(db).then((slug) => res.sendFile(`/home/tom/clients/${slug}/logo.png`));
+  getClientSlug(req['clientDomain'])(db)
+    .then((slug) => res.sendFile(`${staticDir}/${slug}/logo.png`));
 });
 
 app.get('/img/background.jpg', (req, res) => {
-  getClientSlug(req['clientDomain'])(db).then((slug) => res.sendFile(`/home/tom/clients/${slug}/background.jpg`));
+  getClientSlug(req['clientDomain'])(db)
+    .then((slug) => res.sendFile(`${staticDir}/${slug}/background.jpg`));
 });
 
 app.get('/', sendIndex(db));

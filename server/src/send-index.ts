@@ -16,6 +16,28 @@ export default (db) => (req, res) => {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
     <link rel="stylesheet" href="css/screen.css" />
+    <style>
+      .main-header h1 span,
+      .autocomplete-input ul li:hover,
+      .autocomplete-input ul li.active {
+        background-color: ${client.primaryColor};
+      }
+
+      .input input,
+      .results .student strong {
+        color: ${client.primaryColor};
+      }
+
+      .submit,
+      .results .loading,
+      .results .student {
+        background-color: ${client.secondaryColor};
+      }
+
+      .autocomplete-input ul {
+        color: ${client.secondaryColor};
+      }
+    </style>
   </head>
   <body>
     <div id="react-container"></div>
