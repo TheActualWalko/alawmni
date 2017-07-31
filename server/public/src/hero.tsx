@@ -7,7 +7,7 @@ const Hero = ({clientWebsite}) => (
       <span>Alumni</span><br />
       <span>Database</span>
     </h1>
-    <h2><a href={clientWebsite}><img src="img/kcl-badge.png" /></a></h2>
+    <h2><a href={clientWebsite}><img src="img/logo.png" /></a></h2>
   </header>
 );
 

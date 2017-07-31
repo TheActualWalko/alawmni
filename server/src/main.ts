@@ -7,6 +7,7 @@ import * as bodyParser from 'body-parser';
 import getClientDomain from './get-client-domain';
 import bindApiCalls from './bind-api-calls';
 import sendIndex from './send-index';
+import {getClientSlug} from './queries';
 
 const {MYSQL_HOST, MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_DB, PORT = 80} = JSON.parse(fs.readFileSync('.apiConfig', 'utf8'));
 
@@ -24,6 +25,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 bindApiCalls(app, db);
+
+app.get('/img/logo.png', (req, res) => {
+  getClientSlug(req['clientDomain'])(db).then((slug) => res.sendFile(`/home/tom/clients/${slug}/logo.png`));
+});
+
+app.get('/img/background.jpg', (req, res) => {
+  getClientSlug(req['clientDomain'])(db).then((slug) => res.sendFile(`/home/tom/clients/${slug}/background.jpg`));
+});
 
 app.get('/', sendIndex(db));
 app.get('/register', sendIndex(db));

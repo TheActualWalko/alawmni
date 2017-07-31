@@ -34,6 +34,12 @@ export const getClient = (domain) => one(
   })
 );
 
+export const getClientSlug = (domain) => one(
+  `SELECT client_slug FROM clients WHERE domain = ?;`,
+  [domain],
+  ({client_slug}) => client_slug
+);
+
 export const register = (domain, name, email, companyName) => chain(
   one(
     `

@@ -22,7 +22,7 @@ const results = ({students, firm, contactEmail, isWaitingForStudents, hasAutocom
       }
       <li className="main-footer">
         <p>
-          If you would like to be a part of this database please <a onClick={()=>push('register')}>click here to sign up.</a>
+          If you would like to be a part of this database, please <a onClick={()=>push('register')}>click here to sign up.</a>
         </p>
         <p>
           Email <a href={`mailto:${contactEmail}`} target="_blank">{contactEmail}</a> for any questions.
