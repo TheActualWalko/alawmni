@@ -1,2 +1,2 @@
 #!/bin/bash
-./deploy-css.sh && scp -r {package.json,tsconfig.json,dist.webpack.config.js,build.sh,src,img} root@51.255.193.170:/var/www/public/ && ssh root@51.255.193.170 'cd /var/www/public/ && npm i && ./build.sh';
+./deploy-css.sh && scp -r {package.json,tsconfig.json,dist.webpack.config.js,build.sh,src,img,fonts} root@51.255.193.170:/var/www/public/ && ssh root@51.255.193.170 'cd /var/www/public/ && npm i && ./build.sh';

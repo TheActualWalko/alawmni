@@ -5,6 +5,5 @@
 **-min.*
 **/dist/*
 **/css/*
-**/js/*
 **/.htaccess
 **/.apiConfig
