@@ -1,11 +1,17 @@
-- add new row to "clients" table in db
-  - client_slug is important - it will be used to route to assets in the next step
+1. add new row to "clients" table in db
+  - client_slug is IMPORTANT - it will be used to route to assets in step 3!
+  - try to use an abbreviation of the client's name, without spaces or special characters (for example KCLLS, or UBLC)
 
-- add new directory, with name exactly equal (case sensitive) to the client_slug in /home/tom/clients/ 
+2. use FileZilla to FTP into 51.255.193.170, username 'tom'
 
-- add a logo.png and a background.jpg in that directory
+3. open the folder called 'clients' and add a new directory, with name exactly equal to the client_slug you added in step 1 (e.g. KCLLS or UBLC)
+  - these names are case sensitive!
 
-- update client DNS settings to point to us. 
+4. add a logo.png and a background.jpg in the new directory you just created
+  - logo.png should be 800px wide by 240px tall, with transparency
+  - background.jpg should be 2000px wide and about 320kb in size (adjust jpg quality until it's around there. if you can make the filesize even smaller without making it look like shit, go for it!)
+
+5. [Sam will typically do this] update client DNS settings to point to us. 
 - for KCLLS we set the CNAME for alumni.kcllawsociety.com to vps439250.ovh.net
   domain:  vps439250.ovh.net
   IPv4:    51.255.193.170
