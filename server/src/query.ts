@@ -1,8 +1,14 @@
 import {isArray} from 'lodash';
 
-export const many = (queryText, parameters, transform = (x) => x) => (db) => {
+export const many = (queryText, parameters, transform = (x) => x) => (db, debug=false) => {
+  if (debug) {
+    console.log(queryText, parameters);
+  }
   return new Promise((resolve, reject) => {
-    db.query(queryText, parameters, (err, result)=>{
+    db.query(queryText, parameters, (err, result, fields)=>{
+      if (debug) {
+        console.log(err, result, fields);
+      }
       if (err) {
         reject(err);
       } else {
@@ -17,14 +23,14 @@ export const many = (queryText, parameters, transform = (x) => x) => (db) => {
   });
 };
 
-export const one = (queryText, parameters, transform = (x) => x) => (db) => {
-  return many(queryText, parameters, transform)(db).then(results => results[0]);
+export const one = (queryText, parameters, transform = (x) => x) => (db, debug=false) => {
+  return many(queryText, parameters, transform)(db, debug).then(results => results[0]);
 };
 
-export const chain = (...queries) => (db) => {
+export const chain = (...queries) => (db, debug=false) => {
   if (queries.length > 0) {
-    return queries[0](db)
-      .then(() => chain.apply(null, queries.slice(1))(db))
+    return queries[0](db, debug)
+      .then(() => chain.apply(null, queries.slice(1))(db, debug))
   } else {
     return Promise.resolve();
   }
