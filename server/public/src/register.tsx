@@ -40,7 +40,7 @@ const Register = ({
       <Input text={email} email id="email-input" label="Enter your email:" onChange={updateEmail}/>
       <AutocompleteInput
         id="firm-input"
-        label="Name of firm in which you have insight:"
+        label="Name of firm into which you have insight:"
         text={firmName}
         data={firms}
         selected={firm}
