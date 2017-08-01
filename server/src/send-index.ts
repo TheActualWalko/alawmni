@@ -1,4 +1,8 @@
 import {getClient, getCompanies} from './queries';
+import * as fs from 'fs';
+import * as path from 'path';
+
+const css = fs.readFileSync(path.resolve('public/css/screen.css'), 'utf-8');
 
 export default (db) => (req, res) => {
   Promise.all([
@@ -9,13 +13,14 @@ export default (db) => (req, res) => {
     const companies: any = results[1];
     res.send(
 `<!DOCTYPE html>
-<html>
+<html lang='en-UK'>
   <head>
     <title>${client.appDisplayName}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="css/screen.css" />
+    <style>
+      ${css}
+    </style>
     <style>
       .main-header h1 span,
       .autocomplete-input ul li:hover,
