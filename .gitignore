@@ -1,9 +1,7 @@
-**/node_modules/*
-**.codekit
-**.codekit3
-**/min/*
-**-min.*
-**/dist/*
-**/css/*
-**/.htaccess
-**/.apiConfig
+server/node_modules
+server/public/node_modules
+server/dist
+server/public/dist
+server/public/css
+server/.apiConfig
+server/public/config.codekit3
