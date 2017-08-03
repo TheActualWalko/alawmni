@@ -1,13 +1,15 @@
 import {one, many, chain} from './query';
 
-export const getStudentsForCompany = (domain, companyID) => many(
+export const getStudentsForCompany = (domain, companyName) => many(
   `
     SELECT name, email 
     FROM students 
     WHERE id IN (
       SELECT student_id 
       FROM student_companies 
-      WHERE company_id = ?
+      WHERE company_id IN (
+        SELECT id FROM companies WHERE name = ? 
+      )
     )
     AND client_id IN (
       SELECT id 
@@ -15,11 +17,11 @@ export const getStudentsForCompany = (domain, companyID) => many(
       WHERE domain = ?
     );
   `,
-  [companyID, domain]
+  [companyName, domain]
 );
 
 export const getCompanies = () => many(
-  `SELECT name, id FROM companies;`,
+  `SELECT name FROM companies;`,
   []
 );
 

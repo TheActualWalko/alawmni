@@ -2,16 +2,16 @@ import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import React = require('react');
 
-const results = ({students, firm, contactEmail, isWaitingForStudents, hasAutocompletes, highlightIndex, push})=>{
+const results = ({students, company, contactEmail, isWaitingForStudents, hasAutocompletes, highlightIndex, push})=>{
   return (
     <ul className="results">
       {isWaitingForStudents && <li className="loading">loading...</li> }
       { 
         students.map((s, i)=>{
           return (
-            <li key={i} className={`student ${(!hasAutocompletes && highlightIndex === i) && 'active'}`}>
+            <li key={i} className={`student`}>
               <a href={`mailto:${s.email}`} rel="noopener">
-                <h3><strong>{s.name}</strong> knows about <em>{firm.name}</em></h3>
+                <h3><strong>{s.name}</strong> knows about <em>{company}</em></h3>
                 <h4>
                   <img src="img/email.png" alt="Email Icon"/>{s.email}
                 </h4>
@@ -33,11 +33,9 @@ const results = ({students, firm, contactEmail, isWaitingForStudents, hasAutocom
 };
 
 const mapStateToProps = (state) => ({
-  highlightIndex: state.search.highlightIndex,
-  hasAutocompletes: state.search.text !== state.search.firm,
   isWaitingForStudents: state.search.isWaitingForStudents,
   students: state.search.students,
-  firm: state.search.firm,
+  company: state.search.company,
   contactEmail: state.statics.contactEmail
 });
 

@@ -28,9 +28,9 @@ export default (app, db) => {
     const domain = req.clientDomain;
     const name = `${req.body.firstName} ${req.body.lastName}`;
     const email = req.body.email;
-    const companyName = req.body.companyName;
+    const company = req.body.company;
     queries
-      .register(domain, name, email, companyName)(db)
+      .register(domain, name, email, company)(db)
       .then(() => res.send('success'))
       .catch(sendError(res));
   });

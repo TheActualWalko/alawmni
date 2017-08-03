@@ -5,7 +5,7 @@ import store from './store';
 import { Route } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import Home from './home';
-import Register from './register';
+import Register from './register/register';
 
 const wrapper = ({children}) => <div>{children}</div>;
 

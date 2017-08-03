@@ -1,14 +1,12 @@
 import React = require('react');
 import Hero from './hero';
-import Search from './search/input';
+import Search from './search/search';
 import Results from './results';
 
 export default () => (
   <div>
     <Hero />
-    <form className="search">
-      <Search label="Enter Name of Firm:" />
-    </form>
+    <Search label="Enter Name of Firm:" />
     <Results />
   </div>
 );

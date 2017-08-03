@@ -1,14 +1,12 @@
 import {
-  MOVE_HIGHLIGHT_INDEX,
-  UPDATE_SEARCH,
-  SELECT_FIRM,
-  RECEIVE_STUDENTS
+  SELECT_COMPANY,
+  RECEIVE_STUDENTS,
+  CLEAR
 } from './actions';
 
 export default (
   state: any = {
-    text: '',
-    firm: undefined,
+    company: '',
     highlightIndex: -1,
     isWaitingForStudents: false,
     students: []
@@ -16,33 +14,31 @@ export default (
   action
 )=>{
   switch(action.type){
-    case MOVE_HIGHLIGHT_INDEX:
+    case CLEAR:
       return {
         ...state,
-        highlightIndex: Math.max(state.highlightIndex + action.amount, -1)
-      };
-    case UPDATE_SEARCH:
-      return {
-        ...state,
-        text: action.text,
+        company: '',
         students: [],
-        highlightIndex: -1
+        highlightIndex: -1,
+        isWaitingForStudents: false
       };
-    case SELECT_FIRM:
+    case SELECT_COMPANY:
       return {
         ...state,
-        text: action.firm.name,
-        firm: action.firm,
+        company: action.company,
         students: [],
         highlightIndex: -1,
         isWaitingForStudents: true
       };
     case RECEIVE_STUDENTS:
-      return {
+      const newState = {
         ...state,
+        company: action.company,
         students: action.students,
         isWaitingForStudents: false,
       };
+      console.log(newState);
+      return newState;
     default:
       return state;
   }

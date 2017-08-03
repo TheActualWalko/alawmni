@@ -1,5 +1,5 @@
 export default (req, res, next) => {
-  if (req.headers['host'].includes('localhost') || req.headers['host'].includes('51.255.193.170')) {
+  if (req.headers['host'].includes('localhost') || req.headers['host'].includes('51.255.193.170') || req.headers['host'].includes('alumnidb.io')) {
     const cookie = req.cookies['domain'];;
     if (cookie) {
       req.clientDomain = cookie;

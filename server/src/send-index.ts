@@ -8,7 +8,7 @@ export default (db) => (req, res) => {
   Promise.all([
     getClient(req.clientDomain)(db),
     getCompanies()(db)
-  ]).then((results) => {
+  ]).then((results: [any, any]) => {
     const client: any = results[0];
     const companies: any = results[1];
     res.send(
@@ -49,7 +49,7 @@ export default (db) => (req, res) => {
     <div class="background"></div>
     <script>
       const statics = ${JSON.stringify(client)};
-      const firms = ${JSON.stringify(companies)};
+      const companies = ${JSON.stringify(companies.map(c => c.name))};
     </script>
     <script src="dist/vendor.bundle.js"></script>
     <script src="dist/bundle.js"></script>
