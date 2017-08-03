@@ -6,7 +6,7 @@ import Results from './results';
 export default () => (
   <div>
     <Hero />
-    <Search label="Enter Name of Firm:" />
+    <Search />
     <Results />
   </div>
 );

@@ -24,7 +24,11 @@ module.exports = {
 
   module : {
     loaders : [
-      { test: /\.ts(x?)$/, loader : 'ts', include : path.join(__dirname, 'src') }
+      { 
+        test: /\.ts(x?)$/, 
+        loader: 'ts', 
+        include: path.join(__dirname, 'src') 
+      }
     ],
 
     noParse: /node_modules\/json-schema\/lib\/validate\.js/

@@ -10,7 +10,6 @@ import React = require('react');
 import AutocompleteInput from '../autocomplete-input';
 
 interface searchProps {
-  label: string
   company: any
   selectCompany: (string) => void
   clear: () => void
@@ -18,7 +17,6 @@ interface searchProps {
 
 const search = (props: searchProps) => {
   const { 
-    label,
     company, 
     selectCompany,
     clear
@@ -31,7 +29,7 @@ const search = (props: searchProps) => {
     }}>
       <AutocompleteInput
         id="search-input"
-        label={label}
+        label="Enter Name of Firm:"
         data={companies}
         onSelect={selectCompany}
         onChange={clear}
