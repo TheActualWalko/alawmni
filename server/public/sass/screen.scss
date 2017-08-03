@@ -162,9 +162,13 @@ main {
   border-left: 1px solid rgba(0,0,0,0.3);
   font-family: sans-serif;
   background: white;
+  color: #666;
   &:before {
     font-size: 24px;
     content: '▾';
+  }
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -174,9 +178,11 @@ main {
   max-height: 483px;
   overflow: scroll;
   border-top: 1px solid rgba(0,0,0,0.3);
+  width: 100%;
   li {
     padding: 12px 16px;
     font-size: 22px;
+    width: 100%;
     &:hover, &.active, &.rw-state-focus {
       background-color: $primary;
       color: white;

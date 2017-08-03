@@ -6,6 +6,6 @@ const noop = (x?) => {}
 export default ({id, label, data, onSelect = noop, onChange = noop})=>{
   return <div className="input autocomplete-input">
     <label htmlFor={id}>{label}</label>
-    <DropdownInput data={data} onChange={onChange} onSelect={onSelect} suggest={true} filter="contains" placeholder="Type here" />
+    <DropdownInput data={data} onChange={onChange} onSelect={onSelect} suggest={true} filter="contains" placeholder="Type here" duration={0} />
   </div>
 };
