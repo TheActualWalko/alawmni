@@ -6,6 +6,7 @@ import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
 import * as compression from 'compression';
+import * as morgan from 'morgan';
 
 import getClientDomain from './get-client-domain';
 import bindApiCalls from './bind-api-calls';
@@ -31,6 +32,7 @@ const db = mysql.createConnection({
   database: MYSQL_DB
 });
 
+app.use(morgan('dev'))
 app.use(compression());
 app.use(cookieParser());
 app.use(getClientDomain);
