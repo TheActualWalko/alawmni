@@ -97,7 +97,8 @@ main {
     margin-right: -23px;
   }
   img {
-    width: 350px;
+    max-width: 350px;
+    width: auto;
     height: 90px;
     margin: 25px;
   }

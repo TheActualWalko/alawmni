@@ -8,7 +8,7 @@
   - these names are case sensitive!
 
 4. add a logo.png and a background.jpg in the new directory you just created
-  - logo.png should be 700px wide by 180px tall, with transparency
+  - logo.png should be 180px tall and any width up to 700px, with transparency
   - background.jpg should be 2000px wide and about 320kb in size (adjust jpg quality until it's around there. if you can make the filesize even smaller without making it look like shit, go for it!)
 
 5. [Sam will typically do this] update client DNS settings to point to us. 
