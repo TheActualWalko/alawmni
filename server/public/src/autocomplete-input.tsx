@@ -82,7 +82,7 @@ export default class AutocompleteInput extends React.Component<any,any> {
     });
   }
   render() {
-    const {id, data, label, text, selected, onChange, onSelect} = this.props;
+    const {id, data, label, onChange, onSelect} = this.props;
     const {autocompletes, highlightIndex, forceText} = this.state;
     return (
       <Input

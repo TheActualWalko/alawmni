@@ -37,7 +37,6 @@ export default (
         students: action.students,
         isWaitingForStudents: false,
       };
-      console.log(newState);
       return newState;
     default:
       return state;
