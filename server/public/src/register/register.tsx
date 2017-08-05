@@ -5,6 +5,7 @@ import Hero from '../hero';
 import Input from '../input';
 import AutocompleteInput from '../autocomplete-input';
 import {submittable} from './selectors';
+import {registrationSubjectInputTitle} from '../static-selectors';
 import {
   updateSubjectName,
   updateFirstName,
@@ -16,8 +17,8 @@ import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 
 const Register = ({
-  submittable, register,
-  updateFirstName, updateLastName, updateEmail, updateSubjectName 
+  submittable, registrationSubjectInputTitle, register,
+  updateFirstName, updateLastName, updateEmail, updateSubjectName
 }) => (
   <div>
     <Hero />
@@ -34,7 +35,7 @@ const Register = ({
       <Input email id="email-input" label="Enter your email:" onChange={updateEmail}/>
       <AutocompleteInput
         id="subject-input"
-        label="Name of subject into which you have insight:"
+        label={registrationSubjectInputTitle}
         data={allSubjects}
         onChange={updateSubjectName}
       />
@@ -48,7 +49,10 @@ const Register = ({
   </div>
 );
 
-const mapStateToProps = createStructuredSelector({ submittable });
+const mapStateToProps = createStructuredSelector({ 
+  submittable,
+  registrationSubjectInputTitle
+});
 const mapDispatchToProps = {
   updateSubjectName,
   updateFirstName,
