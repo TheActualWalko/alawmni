@@ -14,7 +14,11 @@ export default (db) => (req, res, next) => {
     const slug = host.split('.')[0].toUpperCase();
     getClientDomainFromSlug(slug)(db)
       .then(({domain}) => req.clientDomain = domain)
-      .then(()=>next());
+      .then(()=>next())
+      .catch(()=>{
+        req.clientDomain = 'test';
+        next();
+      })
   } else {
     req.clientDomain = host;
     next();
