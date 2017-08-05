@@ -24,7 +24,8 @@ export default (db) => (req, res) => {
     <style>
       .main-header h1 span,
       .autocomplete-input ul li:hover,
-      .autocomplete-input ul li.active {
+      .autocomplete-input ul li.active,
+      .autocomplete-input ul li.rw-state-focus {
         background-color: ${client.primaryColor};
       }
 
