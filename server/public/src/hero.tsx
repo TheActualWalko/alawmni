@@ -6,7 +6,7 @@ const Hero = ({clientWebsite, push}) => (
   <header className="main-header">
     <h1>
       <a onClick={()=>push('/')}>
-        <span>Alumni</span><br />
+        <span>Alumni</span>
         <span>Database</span>
       </a>
     </h1>

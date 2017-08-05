@@ -82,6 +82,7 @@ main {
   margin: 0 auto 60px auto;
   h1 {
     float: left;
+    max-width: 220px;
   }
   h1 a {
     color: inherit;
@@ -91,8 +92,6 @@ main {
     width: auto;
     background-color: $primary;
     font-size: 40px;
-  }
-  h1 span {
     padding: 12px 16px;
   }
   h2 {
@@ -310,6 +309,24 @@ main {
     padding-top: 0;
     margin-top: 0;
     margin-bottom: 20px;
+    text-align: center;
+    h1 {
+      max-width: 100%;
+      margin: 0 auto;
+      float: none;
+      display:block;
+      text-align: center;
+      span + span {
+        padding-left: 0;
+      }
+    }
+  }
+  .main-header h2 a {
+    display: block;
+    img {
+      display: block;
+      margin: 0 auto;
+    }
   }
   .main-header, .search, .results, .register {
     width: 100%
@@ -322,8 +339,6 @@ main {
     width: 100%;
     margin-right: 0;
     margin-top: 20px;
-    position: relative;
-    left: -23px;
   }
 }
 
@@ -368,6 +383,16 @@ main {
     }
     h4 {
       font-size: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .main-header {
+    h1 {
+      span + span {
+        padding-left: 16px;
+      }
     }
   }
 }
