@@ -44,8 +44,8 @@ html, body {
 body {
   font-family: "Ropa Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow: scroll;
   background-color: #222;
+  overflow-y: scroll;
 }
 
 a:hover {
@@ -176,8 +176,6 @@ main {
 .autocomplete-input ul {
   background-color: white;
   color: $secondary;
-  max-height: 483px;
-  overflow: scroll;
   border-top: 1px solid rgba(0,0,0,0.3);
   width: 100%;
   li {
