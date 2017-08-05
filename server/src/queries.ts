@@ -20,9 +20,30 @@ export const getStudentsForSubject = (domain, subjectName) => many(
   [subjectName, domain]
 );
 
-export const getSubjects = () => many(
+export const getAllSubjects = () => many(
   `SELECT name FROM subjects;`,
   []
+);
+
+export const getSubjectsWithStudents = (domain) => many(
+  `
+    SELECT name 
+    FROM subjects
+    WHERE id IN (
+      SELECT subject_id 
+      FROM student_subjects
+      WHERE student_id IN (
+        SELECT id
+        FROM students
+        WHERE client_id IN (
+          SELECT id
+          FROM clients
+          WHERE domain = ?
+        )
+      )
+    );
+  `,
+  [domain]
 );
 
 export const getClient = (domain) => one(
@@ -33,20 +54,36 @@ export const getClient = (domain) => one(
       contact_email, 
       client_website,
       primary_color,
-      secondary_color
+      secondary_color,
+      search_input_title,
+      recommended_searches_text,
+      registration_subject_input_title
     FROM 
       clients 
     WHERE 
       domain = ?;
    `,
   [domain],
-  ({id, app_display_name, contact_email, client_website, primary_color, secondary_color}) => ({
+  ({
+    id, 
+    app_display_name, 
+    contact_email, 
+    client_website,
+    primary_color,
+    secondary_color,
+    search_input_title,
+    recommended_searches_text,
+    registration_subject_input_title
+  }) => ({
     id,
     appDisplayName: app_display_name,
     contactEmail: contact_email,
     clientWebsite: client_website,
     primaryColor: primary_color,
-    secondaryColor: secondary_color
+    secondaryColor: secondary_color,
+    searchInputTitle: search_input_title,
+    recommendedSearchesText: recommended_searches_text,
+    registrationSubjectInputTitle: registration_subject_input_title
   })
 );
 

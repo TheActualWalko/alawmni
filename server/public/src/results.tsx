@@ -1,8 +1,18 @@
-import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
 import React = require('react');
+import {push} from 'react-router-redux';
+import {isWaitingForStudents, subject, students} from './search/selectors';
+import {contactEmail, recommendedSearchesText} from './static-selectors';
+import {createStructuredSelector} from 'reselect';
+import {connect} from 'react-redux';
 
-const results = ({students, subject, contactEmail, isWaitingForStudents, hasAutocompletes, highlightIndex, push})=>{
+const results = ({
+  students, 
+  subject, 
+  contactEmail, 
+  isWaitingForStudents, 
+  recommendedSearchesText,
+  push
+})=>{
   return (
     <ul className="results">
       {isWaitingForStudents && <li className="loading">loading...</li> }
@@ -21,24 +31,29 @@ const results = ({students, subject, contactEmail, isWaitingForStudents, hasAuto
         })
       }
       <li className="main-footer">
+        { 
+          !!recommendedSearchesText 
+          ? <p>{recommendedSearchesText}</p>
+          : null
+        }
         <p>
-          If you would like to be a part of this database, please <a onClick={()=>push('register')}>click here to sign up.</a>
-        </p>
-        <p>
-          Email <a href={`mailto:${contactEmail}`} target="_blank" rel="noopener">{contactEmail}</a> for any questions.
+          If you would like to be a part of this database, please <a onClick={()=>push('register')}>click here to sign up.</a> Email <a href={`mailto:${contactEmail}`} target="_blank" rel="noopener">{contactEmail}</a> for any questions.
         </p>
       </li>
     </ul>
   );
 };
 
-const mapStateToProps = (state) => ({
-  isWaitingForStudents: state.search.isWaitingForStudents,
-  students: state.search.students,
-  subject: state.search.subject,
-  contactEmail: state.statics.contactEmail
+const mapStateToProps = createStructuredSelector({
+  isWaitingForStudents,
+  students,
+  subject,
+  contactEmail,
+  recommendedSearchesText
 });
 
-const mapDispatchToProps = {push};
+const mapDispatchToProps = {
+  push
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(results)

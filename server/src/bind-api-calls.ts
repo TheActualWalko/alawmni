@@ -12,7 +12,14 @@ export default (app, db) => {
 
   app.get('/subjects', (req, res)=>{
     queries
-      .getSubjects()(db)
+      .getSubjectsWithStudents(req.clientDomain)(db)
+      .then(sendJSON(res))
+      .catch(sendError(res));
+  });
+
+  app.get('/subjects/all', (req, res)=>{
+    queries
+      .getAllSubjects()(db)
       .then(sendJSON(res))
       .catch(sendError(res));
   });

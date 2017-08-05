@@ -1,4 +1,4 @@
-declare var subjects : string[];
+declare var allSubjects : string[];
 
 import React = require('react');
 import Hero from '../hero';
@@ -35,7 +35,7 @@ const Register = ({
       <AutocompleteInput
         id="subject-input"
         label="Name of subject into which you have insight:"
-        data={subjects}
+        data={allSubjects}
         onChange={updateSubjectName}
       />
       <input 

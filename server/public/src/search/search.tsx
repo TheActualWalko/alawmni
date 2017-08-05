@@ -1,26 +1,22 @@
-declare var subjects : string[];
+declare var subjectsWithStudents : string[];
 
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {selectSubject, clear} from './actions';
-import {getAll} from './selectors';
+import {subject} from './selectors';
+import {searchInputTitle} from '../static-selectors';
 
 import React = require('react');
 
 import AutocompleteInput from '../autocomplete-input';
 
-interface searchProps {
-  subject: any
-  selectSubject: (string) => void
-  clear: () => void
-};
 
-const search = (props: searchProps) => {
-  const { 
-    subject, 
-    selectSubject,
-    clear
-  } = props;
+const search = ({ 
+  subject, 
+  selectSubject,
+  clear,
+  searchInputTitle
+}) => {
   return (
     <form className="search" onSubmit={(e) => {
       e.preventDefault(); 
@@ -29,8 +25,8 @@ const search = (props: searchProps) => {
     }}>
       <AutocompleteInput
         id="search-input"
-        label="Enter Name of Firm:"
-        data={subjects}
+        label={searchInputTitle}
+        data={subjectsWithStudents}
         onSelect={selectSubject}
         onChange={clear}
       />
@@ -39,7 +35,11 @@ const search = (props: searchProps) => {
 };
 
 
-const mapStateToProps = getAll;
+const mapStateToProps = createStructuredSelector({
+  search,
+  searchInputTitle
+});
+
 const mapDispatchToProps = {selectSubject, clear};
 
 export default connect(mapStateToProps, mapDispatchToProps)(search);

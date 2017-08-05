@@ -1,4 +1,4 @@
-import {getClient, getSubjects} from './queries';
+import {getClient, getSubjectsWithStudents, getAllSubjects} from './queries';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -7,10 +7,12 @@ const css = fs.readFileSync(path.resolve('public/css/screen.css'), 'utf-8');
 export default (db) => (req, res) => {
   Promise.all([
     getClient(req.clientDomain)(db),
-    getSubjects()(db)
-  ]).then((results: [any, any]) => {
+    getSubjectsWithStudents(req.clientDomain)(db),
+    getAllSubjects()(db)
+  ]).then((results: [any, any, any]) => {
     const client: any = results[0];
-    const subjects: any = results[1];
+    const subjectsWithStudents: any = results[1];
+    const allSubjects: any = results[2];
     res.send(
 `<!DOCTYPE html>
 <html lang='en-UK'>
@@ -50,7 +52,8 @@ export default (db) => (req, res) => {
     <div class="background"></div>
     <script>
       const statics = ${JSON.stringify(client)};
-      const subjects = ${JSON.stringify(subjects.map(c => c.name))};
+      const subjectsWithStudents = ${JSON.stringify(subjectsWithStudents.map(c => c.name))};
+      const allSubjects = ${JSON.stringify(allSubjects.map(c => c.name))};
     </script>
     <script src="dist/vendor.bundle.js"></script>
     <script src="dist/bundle.js"></script>
