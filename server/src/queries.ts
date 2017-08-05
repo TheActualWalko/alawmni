@@ -46,6 +46,15 @@ export const getSubjectsWithStudents = (domain) => many(
   [domain]
 );
 
+export const getClientDomainFromSlug = (slug) => one(
+  `
+    SELECT domain
+    FROM clients
+    WHERE client_slug = ?;
+  `,
+  [slug]
+);
+
 export const getClient = (domain) => one(
   `
     SELECT 

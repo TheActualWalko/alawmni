@@ -35,7 +35,7 @@ const db = mysql.createConnection({
 app.use(morgan('dev'))
 app.use(compression());
 app.use(cookieParser());
-app.use(getClientDomain);
+app.use(getClientDomain(db));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
