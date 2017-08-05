@@ -1,6 +1,4 @@
-import {ClientStatics} from './client-statics';
-
-declare var statics: ClientStatics;
+declare var statics: any;
 
 import reduxThunk from './redux-thunk';
 import {createStore, applyMiddleware, combineReducers} from 'redux';
