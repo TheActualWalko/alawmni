@@ -1,2 +1,2 @@
 #!/bin/bash
-./deploy-server.sh && cd ../public && ./deploy.sh && cd ../server && ./remote-restart-server.sh
+scp -r {src,package.json,tsconfig.json,build.sh,run.sh} root@51.255.193.170:/var/www/server/
