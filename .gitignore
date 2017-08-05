@@ -1,7 +1,10 @@
 server/node_modules
-server/public/node_modules
 server/dist
-server/public/dist
-server/public/css
 server/.apiConfig
-server/public/config.codekit3
+
+public/node_modules
+public/dist
+public/css
+public/config.codekit3
+
+dev-statics/clients

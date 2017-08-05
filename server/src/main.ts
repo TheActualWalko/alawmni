@@ -53,7 +53,7 @@ app.get('/img/background.jpg', (req, res) => {
 
 app.get('/', sendIndex(db));
 app.get('/register', sendIndex(db));
-app.use(express.static('public'))
+app.use(express.static('../public'))
 
 db.connect((err) => {
   if (err) {

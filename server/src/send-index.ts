@@ -2,7 +2,7 @@ import {getClient, getSubjectsWithStudents, getAllSubjects} from './queries';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const css = fs.readFileSync(path.resolve('public/css/screen.css'), 'utf-8');
+const css = fs.readFileSync(path.resolve('../public/css/screen.css'), 'utf-8');
 
 export default (db) => (req, res) => {
   Promise.all([
