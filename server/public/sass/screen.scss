@@ -83,6 +83,9 @@ main {
   h1 {
     float: left;
   }
+  h1 a {
+    color: inherit;
+  }
   h1 span {
     display: inline-block;
     width: auto;

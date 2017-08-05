@@ -5,11 +5,356 @@
     <title>KCL Law Alumni Database</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href= "css/screen.css">
+    <style>
+      @charset "UTF-8";
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent: 
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+html {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+q, blockquote {
+  quotes: none; }
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+a img {
+  border: none; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block; }
+
+* {
+  box-sizing: border-box; }
+
+/* latin-ext */
+@font-face {
+  font-family: 'Ropa Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Ropa Sans Regular"), local("RopaSans-Regular"), url("/fonts/ropa-sans-regular-ext.woff2") format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face {
+  font-family: 'Ropa Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Ropa Sans Regular"), local("RopaSans-Regular"), url("/fonts/ropa-sans-regular.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
+html, body {
+  background-image: url("/img/background.jpg");
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: "Ropa Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: #222;
+  overflow-y: scroll; }
+
+a:hover {
+  cursor: pointer; }
+
+.background {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-image: url("/img/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%; }
+
+#react-container {
+  position: relative;
+  z-index: 2; }
+
+main {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 20px; }
+
+.main-header {
+  color: white;
+  width: 640px;
+  padding-top: 60px;
+  margin: 0 auto 60px auto; }
+  .main-header h1 {
+    float: left; }
+  .main-header h1 span {
+    display: inline-block;
+    width: auto;
+    background-color: #58b69e;
+    font-size: 40px; }
+  .main-header h1 span {
+    padding: 12px 16px; }
+  .main-header h2 {
+    float: right;
+    margin-right: -23px; }
+  .main-header img {
+    max-width: 350px;
+    width: auto;
+    height: 90px;
+    margin: 25px; }
+  .main-header:after {
+    content: "";
+    clear: both;
+    width: 100%;
+    display: block; }
+
+.main-footer {
+  padding: 20px 0;
+  color: white;
+  left: 0;
+  right: 0;
+  width: auto; }
+  .main-footer p {
+    text-align: center;
+    max-width: 440px;
+    margin: 0 auto; }
+  .main-footer p + p {
+    margin-top: 14px; }
+  .main-footer a {
+    text-decoration: underline;
+    color: inherit; }
+
+.input {
+  width: 100%; }
+  .input label {
+    color: white;
+    display: block;
+    font-size: 32px;
+    margin-bottom: 15px;
+    font-weight: 200; }
+  .input input {
+    color: #58b69e;
+    background-color: white;
+    border: none;
+    padding: 12px 16px;
+    height: 50px;
+    display: block;
+    font-size: 22px;
+    width: 100%; }
+
+.autocomplete-input .rw-combobox {
+  position: relative;
+  overflow: hidden; }
+
+.autocomplete-input .rw-select.rw-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
+  font-family: sans-serif;
+  background: white;
+  color: #666; }
+  .autocomplete-input .rw-select.rw-btn:before {
+    font-size: 24px;
+    content: '▾'; }
+  .autocomplete-input .rw-select.rw-btn:hover {
+    cursor: pointer; }
+
+.autocomplete-input ul {
+  background-color: white;
+  color: #102c42;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  width: 100%; }
+  .autocomplete-input ul li {
+    padding: 12px 16px;
+    font-size: 22px;
+    width: 100%; }
+    .autocomplete-input ul li:hover, .autocomplete-input ul li.active, .autocomplete-input ul li.rw-state-focus {
+      background-color: #58b69e;
+      color: white;
+      cursor: pointer; }
+
+.search, .results, .register {
+  width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2; }
+
+.register .input {
+  margin-bottom: 20px; }
+
+.submit {
+  width: 100%;
+  padding: 15px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 32px;
+  background-color: #102c42;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  position: relative; }
+  .submit:hover {
+    cursor: pointer; }
+  .submit:after {
+    content: '';
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.1); }
+  .submit:hover:after {
+    display: block; }
+  .submit.disabled, .submit.disabled:hover {
+    color: rgba(255, 255, 255, 0.35);
+    cursor: default; }
+
+.results .loading {
+  background-color: #102c42;
+  margin-top: 10px;
+  color: white;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  font-style: italic; }
+
+.results .student {
+  background-color: #102c42;
+  color: white;
+  margin-top: 10px;
+  width: 100%; }
+  .results .student a {
+    display: block;
+    padding: 20px 30px;
+    text-decoration: none;
+    color: white;
+    position: relative; }
+    .results .student a:hover {
+      cursor: pointer; }
+    .results .student a:after {
+      content: '';
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+      background-color: rgba(255, 255, 255, 0.1); }
+    .results .student a:hover:after {
+      display: block; }
+  .results .student h3 {
+    font-size: 30px;
+    margin-bottom: 14px; }
+  .results .student h4 {
+    font-size: 22px; }
+    .results .student h4 img {
+      width: 24px;
+      height: auto;
+      vertical-align: middle;
+      margin-right: 5px; }
+  .results .student strong, .results .student em {
+    text-transform: uppercase;
+    font-weight: bold; }
+  .results .student strong {
+    color: #58b69e; }
+
+@media screen and (max-width: 680px) {
+  main {
+    padding: 40px; }
+
+  .main-header {
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 20px; }
+
+  .main-header, .search, .results, .register {
+    width: 100%; } }
+@media screen and (max-width: 650px) {
+  .main-header h2 {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-top: 20px;
+    position: relative;
+    left: -23px; } }
+@media screen and (max-width: 540px) {
+  .main-footer p {
+    max-width: 315px;
+    margin-top: 8px; } }
+@media screen and (max-width: 440px) {
+  main {
+    padding: 20px; }
+
+  .main-header h2 img {
+    max-width: 228px;
+    height: 58px;
+    margin: 16px; }
+
+  .input label {
+    font-size: 24px;
+    margin-bottom: 5px; }
+  .input input {
+    padding: 12px 16px;
+    font-size: 18px; }
+
+  .autocomplete-input ul li {
+    font-size: 18px; }
+
+  .results .student a {
+    padding: 10px; }
+  .results .student h3 {
+    font-size: 22px;
+    margin-bottom: 8px; }
+  .results .student h4 {
+    font-size: 16px; } }
+
+    </style>
     <style>
       .main-header h1 span,
       .autocomplete-input ul li:hover,
-      .autocomplete-input ul li.active {
+      .autocomplete-input ul li.active,
+      .autocomplete-input ul li.rw-state-focus {
         background-color: #58b69e;
       }
 
@@ -33,8 +378,9 @@
     <div id="react-container"></div>
     <div class="background"></div>
     <script>
-      const statics = {"id":1,"appDisplayName":"KCL Law Alumni Database","contactEmail":"kcllsgeneral@gmail.com","clientWebsite":"http://kcllawsociety.com","primaryColor":"#58b69e","secondaryColor":"#102c42"};
-      const companies = ["5 King’s Bench Walk","9 Bedford Row","Allen & Overy","Appleton & Leiden","Ashurst","Atkin Chambers","Baker & McKenzie","Barclay’s","Berry","Bimder Grosswang","Bird & Bird","Blake Morgan","BLP","Bonelli Erede","Charles Coleman LLP","Cleary Gottleib","Clifford Chance","CMS Cameron Mckenna","Covington & Burling","Credit Suisse","Davis Polk","Debevoise & Plimpton","Deloitte","Dentons","DMH Stallard","Eversheds","Freshfields","Gibson Dunn & Crutcher","Gillhams LLP","Herbert Smith Freehills","Hogan Lovells","Jones Day","King & Wood Mallesons","Kirkland & Ellis","Latham & Watkins","Linklaters","Macfarlanes","Mischon de Reya","Morrison & Foerster","NHS","Norton Rose Fulbright","Owen White Solicitors","Philip Ross Solicitors","Pinsent Masons","Quinn Emmanuel","Reed Smith","Shearman & Sterling","Sidley Austin","Skadden","Sky PLC","Slaughter & May","Steinfeld Law LLP","Sullivan & Cromwell","Taylor Wessing","Transport for London","Weil","White & Case"];
+      const statics = {"id":1,"appDisplayName":"KCL Law Alumni Database","contactEmail":"kcllsgeneral@gmail.com","clientWebsite":"http://kcllawsociety.com","primaryColor":"#58b69e","secondaryColor":"#102c42","searchInputTitle":"Enter Name of Firm","recommendedSearchesText":null,"registrationSubjectInputTitle":"Name of company into which you have insight"};
+      const subjectsWithStudents = ["5 King’s Bench Walk","9 Bedford Row","Allen & Overy","Ashurst","Atkin Chambers","Baker & McKenzie","Barclay’s","Bimder Grosswang","Bird & Bird","Blake Morgan","BLP","Bonelli Erede","Charles Coleman LLP","Cleary Gottleib","Clifford Chance","CMS Cameron Mckenna","Covington & Burling","Credit Suisse","Davis Polk","Debevoise & Plimpton","Deloitte","Dentons","Eversheds","Freshfields","Gibson Dunn & Crutcher","Gillhams LLP","Herbert Smith Freehills","Hogan Lovells","Jones Day","King & Wood Mallesons","Kirkland & Ellis","Latham & Watkins","Linklaters","Macfarlanes","Mischon de Reya","Morrison & Foerster","NHS","Norton Rose Fulbright","Owen White Solicitors","Philip Ross Solicitors","Pinsent Masons","Quinn Emmanuel","Reed Smith","Shearman & Sterling","Sidley Austin","Skadden","Sky PLC","Slaughter & May","Steinfeld Law LLP","Sullivan & Cromwell","Taylor Wessing","Transport for London","Weil","White & Case"];
+      const allSubjects = ["5 King’s Bench Walk","9 Bedford Row","Allen & Overy","Appleton & Leiden","Ashurst","Atkin Chambers","Baker & McKenzie","Barclay’s","Berry","Bimder Grosswang","Bird & Bird","Blake Morgan","BLP","Bonelli Erede","Charles Coleman LLP","Cleary Gottleib","Clifford Chance","CMS Cameron Mckenna","Covington & Burling","Credit Suisse","Davis Polk","Debevoise & Plimpton","Deloitte","Dentons","DMH Stallard","Eversheds","Freshfields","Gibson Dunn & Crutcher","Gillhams LLP","Herbert Smith Freehills","Hogan Lovells","Jones Day","King & Wood Mallesons","Kirkland & Ellis","Latham & Watkins","Linklaters","Macfarlanes","Mischon de Reya","Morrison & Foerster","NHS","Norton Rose Fulbright","Owen White Solicitors","Philip Ross Solicitors","Pinsent Masons","Quinn Emmanuel","Reed Smith","Shearman & Sterling","Sidley Austin","Skadden","Sky PLC","Slaughter & May","Steinfeld Law LLP","Sullivan & Cromwell","Taylor Wessing","Transport for London","Weil","White & Case"];
     </script>
     <script src="dist/vendor.bundle.js"></script>
     <script src="dist/bundle.js"></script>
