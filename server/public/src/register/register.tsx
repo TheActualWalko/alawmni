@@ -1,4 +1,4 @@
-declare var companies : string[];
+declare var subjects : string[];
 
 import React = require('react');
 import Hero from '../hero';
@@ -6,7 +6,7 @@ import Input from '../input';
 import AutocompleteInput from '../autocomplete-input';
 import {submittable} from './selectors';
 import {
-  updateCompanyName,
+  updateSubjectName,
   updateFirstName,
   updateLastName,
   updateEmail,
@@ -17,7 +17,7 @@ import {createStructuredSelector} from 'reselect';
 
 const Register = ({
   submittable, register,
-  updateFirstName, updateLastName, updateEmail, updateCompanyName 
+  updateFirstName, updateLastName, updateEmail, updateSubjectName 
 }) => (
   <div>
     <Hero />
@@ -33,16 +33,16 @@ const Register = ({
       <Input id="last-name-input" label="Enter your last name:" onChange={updateLastName}/>
       <Input email id="email-input" label="Enter your email:" onChange={updateEmail}/>
       <AutocompleteInput
-        id="company-input"
-        label="Name of company into which you have insight:"
-        data={companies}
-        onChange={updateCompanyName}
+        id="subject-input"
+        label="Name of subject into which you have insight:"
+        data={subjects}
+        onChange={updateSubjectName}
       />
       <input 
         className={`submit ${submittable ? '' : 'disabled'}`} 
         disabled={!submittable}
         type="submit"
-        title="Concompany"
+        title="Confirm"
       />
     </form>
   </div>
@@ -50,7 +50,7 @@ const Register = ({
 
 const mapStateToProps = createStructuredSelector({ submittable });
 const mapDispatchToProps = {
-  updateCompanyName,
+  updateSubjectName,
   updateFirstName,
   updateLastName,
   updateEmail,

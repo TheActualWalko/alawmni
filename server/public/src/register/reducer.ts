@@ -1,5 +1,5 @@
 import {
-  UPDATE_COMPANY_NAME,
+  UPDATE_SUBJECT_NAME,
   UPDATE_FIRST_NAME,
   UPDATE_LAST_NAME,
   UPDATE_EMAIL
@@ -7,7 +7,7 @@ import {
 
 export default (
   state: any = {
-    company: '',
+    subject: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -16,10 +16,10 @@ export default (
   action
 ) => {
   switch(action.type){
-    case UPDATE_COMPANY_NAME:
+    case UPDATE_SUBJECT_NAME:
       return {
         ...state,
-        company: action.text,
+        subject: action.text,
         highlightIndex: -1
       };
     case UPDATE_FIRST_NAME:

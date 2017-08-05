@@ -1,4 +1,4 @@
-import {getClient, getCompanies} from './queries';
+import {getClient, getSubjects} from './queries';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -7,10 +7,10 @@ const css = fs.readFileSync(path.resolve('public/css/screen.css'), 'utf-8');
 export default (db) => (req, res) => {
   Promise.all([
     getClient(req.clientDomain)(db),
-    getCompanies()(db)
+    getSubjects()(db)
   ]).then((results: [any, any]) => {
     const client: any = results[0];
-    const companies: any = results[1];
+    const subjects: any = results[1];
     res.send(
 `<!DOCTYPE html>
 <html lang='en-UK'>
@@ -50,7 +50,7 @@ export default (db) => (req, res) => {
     <div class="background"></div>
     <script>
       const statics = ${JSON.stringify(client)};
-      const companies = ${JSON.stringify(companies.map(c => c.name))};
+      const subjects = ${JSON.stringify(subjects.map(c => c.name))};
     </script>
     <script src="dist/vendor.bundle.js"></script>
     <script src="dist/bundle.js"></script>

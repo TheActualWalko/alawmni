@@ -1,14 +1,14 @@
 import {one, many, chain} from './query';
 
-export const getStudentsForCompany = (domain, companyName) => many(
+export const getStudentsForSubject = (domain, subjectName) => many(
   `
     SELECT name, email 
     FROM students 
     WHERE id IN (
       SELECT student_id 
-      FROM student_companies 
-      WHERE company_id IN (
-        SELECT id FROM companies WHERE name = ? 
+      FROM student_subjects 
+      WHERE subject_id IN (
+        SELECT id FROM subjects WHERE name = ? 
       )
     )
     AND client_id IN (
@@ -17,11 +17,11 @@ export const getStudentsForCompany = (domain, companyName) => many(
       WHERE domain = ?
     );
   `,
-  [companyName, domain]
+  [subjectName, domain]
 );
 
-export const getCompanies = () => many(
-  `SELECT name FROM companies;`,
+export const getSubjects = () => many(
+  `SELECT name FROM subjects;`,
   []
 );
 
@@ -56,7 +56,7 @@ export const getClientSlug = (domain) => one(
   ({client_slug}) => client_slug
 );
 
-export const register = (domain, name, email, companyName) => chain(
+export const register = (domain, name, email, subjectName) => chain(
   one(
     `
       INSERT INTO students (
@@ -76,24 +76,24 @@ export const register = (domain, name, email, companyName) => chain(
   ),
   one(
     `
-      INSERT INTO companies (
+      INSERT INTO subjects (
         name
       ) VALUES (
         ?
       ) ON DUPLICATE KEY UPDATE name = ?;
     `,
-    [companyName, companyName]
+    [subjectName, subjectName]
   ),
   one(
     `
-      INSERT INTO student_companies (
+      INSERT INTO student_subjects (
         student_id, 
-        company_id
+        subject_id
       ) VALUES (
         (SELECT id FROM students WHERE email = ?),
-        (SELECT id FROM companies WHERE name = ?)
+        (SELECT id FROM subjects WHERE name = ?)
       );
     `,
-    [email, companyName]
+    [email, subjectName]
   )
 );

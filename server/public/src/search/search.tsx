@@ -1,8 +1,8 @@
-declare var companies : string[];
+declare var subjects : string[];
 
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
-import {selectCompany, clear} from './actions';
+import {selectSubject, clear} from './actions';
 import {getAll} from './selectors';
 
 import React = require('react');
@@ -10,15 +10,15 @@ import React = require('react');
 import AutocompleteInput from '../autocomplete-input';
 
 interface searchProps {
-  company: any
-  selectCompany: (string) => void
+  subject: any
+  selectSubject: (string) => void
   clear: () => void
 };
 
 const search = (props: searchProps) => {
   const { 
-    company, 
-    selectCompany,
+    subject, 
+    selectSubject,
     clear
   } = props;
   return (
@@ -30,8 +30,8 @@ const search = (props: searchProps) => {
       <AutocompleteInput
         id="search-input"
         label="Enter Name of Firm:"
-        data={companies}
-        onSelect={selectCompany}
+        data={subjects}
+        onSelect={selectSubject}
         onChange={clear}
       />
     </form>
@@ -40,6 +40,6 @@ const search = (props: searchProps) => {
 
 
 const mapStateToProps = getAll;
-const mapDispatchToProps = {selectCompany, clear};
+const mapDispatchToProps = {selectSubject, clear};
 
 export default connect(mapStateToProps, mapDispatchToProps)(search);

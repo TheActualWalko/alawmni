@@ -4,15 +4,15 @@ const sendJSON = (res) => (result) => res.send(JSON.stringify(result, null, 2));
 const sendError = (res) => (error) => res.status(500).send(error);
 
 export default (app, db) => {
-  app.get('/company/:companyID/students', (req, res)=>{
+  app.get('/subject/:subjectID/students', (req, res)=>{
     queries
-      .getStudentsForCompany(req.clientDomain, req.params.companyID)(db)
+      .getStudentsForSubject(req.clientDomain, req.params.subjectID)(db)
       .then(sendJSON(res));
   });
 
-  app.get('/companies', (req, res)=>{
+  app.get('/subjects', (req, res)=>{
     queries
-      .getCompanies()(db)
+      .getSubjects()(db)
       .then(sendJSON(res))
       .catch(sendError(res));
   });
@@ -28,9 +28,9 @@ export default (app, db) => {
     const domain = req.clientDomain;
     const name = `${req.body.firstName} ${req.body.lastName}`;
     const email = req.body.email;
-    const company = req.body.company;
+    const subject = req.body.subject;
     queries
-      .register(domain, name, email, company)(db)
+      .register(domain, name, email, subject)(db)
       .then(() => res.send('success'))
       .catch(sendError(res));
   });

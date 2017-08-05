@@ -1,12 +1,12 @@
 import {
-  SELECT_COMPANY,
+  SELECT_SUBJECT,
   RECEIVE_STUDENTS,
   CLEAR
 } from './actions';
 
 export default (
   state: any = {
-    company: '',
+    subject: '',
     highlightIndex: -1,
     isWaitingForStudents: false,
     students: []
@@ -17,15 +17,15 @@ export default (
     case CLEAR:
       return {
         ...state,
-        company: '',
+        subject: '',
         students: [],
         highlightIndex: -1,
         isWaitingForStudents: false
       };
-    case SELECT_COMPANY:
+    case SELECT_SUBJECT:
       return {
         ...state,
-        company: action.company,
+        subject: action.subject,
         students: [],
         highlightIndex: -1,
         isWaitingForStudents: true
@@ -33,7 +33,7 @@ export default (
     case RECEIVE_STUDENTS:
       const newState = {
         ...state,
-        company: action.company,
+        subject: action.subject,
         students: action.students,
         isWaitingForStudents: false,
       };

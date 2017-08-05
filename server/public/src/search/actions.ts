@@ -5,24 +5,24 @@ export const clear = ()=>({
   type: CLEAR
 })
 
-export const SELECT_COMPANY = 'alawmni/search/SELECT_COMPANY';
-export const selectCompany = (company: any)=>{
+export const SELECT_SUBJECT = 'alawmni/search/SELECT_SUBJECT';
+export const selectSubject = (subject: any)=>{
   return (dispatch, getState)=>{
     dispatch({
-      type: SELECT_COMPANY,
-      company
+      type: SELECT_SUBJECT,
+      subject
     });
-    $.get(`/company/${encodeURIComponent(company)}/students`, (result)=>{
+    $.get(`/subject/${encodeURIComponent(subject)}/students`, (result)=>{
       const students = JSON.parse(result);
-      dispatch(receiveStudents(students, company));
+      dispatch(receiveStudents(students, subject));
     });
   };
 }
 
 
 export const RECEIVE_STUDENTS = 'alawmni/search/RECEIVE_STUDENTS';
-export const receiveStudents = (students: any[], company: string)=>({
+export const receiveStudents = (students: any[], subject: string)=>({
   type: RECEIVE_STUDENTS,
   students, 
-  company
+  subject
 });

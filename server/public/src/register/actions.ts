@@ -2,10 +2,10 @@ import $ = require('jquery');
 import {push} from 'react-router-redux';
 import {getAll} from './selectors';
 
-export const UPDATE_COMPANY_NAME = 'alawmni/register/UPDATE_COMPANY_NAME';
-export const updateCompanyName = (text: string)=>{
+export const UPDATE_SUBJECT_NAME = 'alawmni/register/UPDATE_SUBJECT_NAME';
+export const updateSubjectName = (text: string)=>{
   return {
-    type: UPDATE_COMPANY_NAME,
+    type: UPDATE_SUBJECT_NAME,
     text
   };
 }
@@ -36,10 +36,10 @@ export const updateEmail = (text: string)=>{
 
 export const register = ()=>{
   return (dispatch, getState) => {
-    const {email, firstName, lastName, company, submittable} = getAll(getState());
+    const {email, firstName, lastName, subject, submittable} = getAll(getState());
     $.post(
       '/register', 
-      { email, firstName, lastName, company }, 
+      { email, firstName, lastName, subject }, 
       (result)=>{
         if (result === 'success') {
           alert('Registered successfully!');
