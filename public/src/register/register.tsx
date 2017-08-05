@@ -15,7 +15,7 @@ import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 
 const Register = ({
-  submittable, registrationSubjectInputTitle, register,
+  submittable, registrationSubjectInputTitle, allSubjects, register,
   updateFirstName, updateLastName, updateEmail, updateSubjectName
 }) => (
   <div>
@@ -49,7 +49,8 @@ const Register = ({
 
 const mapStateToProps = createStructuredSelector({ 
   submittable,
-  registrationSubjectInputTitle
+  registrationSubjectInputTitle,
+  allSubjects
 });
 const mapDispatchToProps = {
   updateSubjectName,

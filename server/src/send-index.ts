@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as reactDomServer from 'react-dom/server';
 import * as React from 'react';
 import app from '../../public/src/root';
+import createMemoryHistory from 'history/createMemoryHistory';
 
 const css = fs.readFileSync(path.resolve('../public/css/screen.css'), 'utf-8');
 
@@ -14,13 +15,25 @@ export default (db) => (req, res) => {
     getAllSubjects()(db)
   ]).then((results: [any, any, any]) => {
     const client: any = results[0];
-    const subjectsWithStudents: any = results[1];
-    const allSubjects: any = results[2];
+    const subjectsWithStudents: any = results[1].map(({name}) => name);
+    const allSubjects: any = results[2].map(({name}) => name);
     const statics = {
       ...client,
       subjectsWithStudents,
       allSubjects
     };
+
+    const appRender = reactDomServer.renderToString(
+      React.createElement(
+        app, 
+        {
+          statics, 
+          history: createMemoryHistory({
+            initialEntries: [req.route.path]
+          })
+        }
+      )
+    );
 
     res.send(
 `<!DOCTYPE html>
@@ -57,7 +70,7 @@ export default (db) => (req, res) => {
     </style>
   </head>
   <body>
-    <div id="react-container">${reactDomServer.renderToString(React.createElement(app, {statics}))}</div>
+    <div id="react-container">${appRender}</div>
     <div class="background"></div>
     <script>
       const statics = ${JSON.stringify(statics)};
