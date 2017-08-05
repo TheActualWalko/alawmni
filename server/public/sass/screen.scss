@@ -31,10 +31,6 @@ $primary: #58b69e;
 $secondary: #102c42;
 
 html, body {
-  background-image: url('/img/background.jpg');
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
   height: 100%;
   width: 100%;
   margin: 0; 
@@ -45,7 +41,6 @@ body {
   font-family: "Ropa Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   background-color: #222;
-  overflow-y: scroll;
 }
 
 a:hover {
@@ -62,6 +57,7 @@ a:hover {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
+  min-height: 800px;
 }
 
 #react-container {
@@ -70,9 +66,13 @@ a:hover {
 }
 
 main {
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding-bottom: 20px;
+  overflow-y: scroll;
 }
 
 .main-header {
