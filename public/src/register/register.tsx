@@ -1,11 +1,9 @@
-declare var allSubjects : string[];
-
 import React = require('react');
 import Hero from '../hero';
 import Input from '../input';
 import AutocompleteInput from '../autocomplete-input';
 import {submittable} from './selectors';
-import {registrationSubjectInputTitle} from '../static-selectors';
+import {registrationSubjectInputTitle, allSubjects} from '../static-selectors';
 import {
   updateSubjectName,
   updateFirstName,

@@ -1,10 +1,8 @@
-declare var subjectsWithStudents : string[];
-
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {selectSubject, clear} from './actions';
 import {subject} from './selectors';
-import {searchInputTitle} from '../static-selectors';
+import {searchInputTitle, subjectsWithStudents} from '../static-selectors';
 
 import React = require('react');
 
@@ -15,7 +13,8 @@ const search = ({
   subject, 
   selectSubject,
   clear,
-  searchInputTitle
+  searchInputTitle,
+  subjectsWithStudents
 }) => {
   return (
     <form className="search" onSubmit={(e) => {
@@ -37,7 +36,8 @@ const search = ({
 
 const mapStateToProps = createStructuredSelector({
   search,
-  searchInputTitle
+  searchInputTitle,
+  subjectsWithStudents
 });
 
 const mapDispatchToProps = {selectSubject, clear};

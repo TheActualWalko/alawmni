@@ -9,11 +9,15 @@ import Register from './register/register';
 
 const wrapper = ({children}) => <div>{children}</div>;
 
-export default class App extends React.Component<{},{}>{
-  // for some reason these components aren't typechecking properly :/
+export default class App extends React.Component<{statics: any},{}>{
+  store = null
+  componentWillMount() {
+    this.store = store(this.props.statics);
+  }
   render() {
+    // for some reason these components aren't typechecking properly
     return (
-      <Provider store={store}>
+      <Provider store={this.store}>
         <ConnectedRouter history={history}>
           <main>
             <Route exact path="/" component={Home} />

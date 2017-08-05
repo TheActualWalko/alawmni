@@ -1,8 +1,7 @@
-server/node_modules
+node_modules
 server/dist
 server/.apiConfig
 
-public/node_modules
 public/dist
 public/css
 public/config.codekit3

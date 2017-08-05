@@ -8,6 +8,6 @@
     "target": "ES5",
     "module": "commonjs",
     "jsx": "react",
-    "lib": ["es2015", "es2015.iterable"]
+    "lib": ["es2015", "es2015.iterable", "dom"]
   }
 }

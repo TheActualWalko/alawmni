@@ -50,6 +50,6 @@ module.exports = {
   },
 
   modulesDirectories: [
-    'node_modules'
+    '../node_modules'
   ]
 };

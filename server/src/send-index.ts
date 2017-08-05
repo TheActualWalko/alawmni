@@ -1,6 +1,9 @@
 import {getClient, getSubjectsWithStudents, getAllSubjects} from './queries';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as reactDomServer from 'react-dom/server';
+import * as React from 'react';
+import app from '../../public/src/root';
 
 const css = fs.readFileSync(path.resolve('../public/css/screen.css'), 'utf-8');
 
@@ -13,6 +16,12 @@ export default (db) => (req, res) => {
     const client: any = results[0];
     const subjectsWithStudents: any = results[1];
     const allSubjects: any = results[2];
+    const statics = {
+      ...client,
+      subjectsWithStudents,
+      allSubjects
+    };
+
     res.send(
 `<!DOCTYPE html>
 <html lang='en-UK'>
@@ -48,12 +57,10 @@ export default (db) => (req, res) => {
     </style>
   </head>
   <body>
-    <div id="react-container"></div>
+    <div id="react-container">${reactDomServer.renderToString(React.createElement(app, {statics}))}</div>
     <div class="background"></div>
     <script>
-      const statics = ${JSON.stringify(client)};
-      const subjectsWithStudents = ${JSON.stringify(subjectsWithStudents.map(c => c.name))};
-      const allSubjects = ${JSON.stringify(allSubjects.map(c => c.name))};
+      const statics = ${JSON.stringify(statics)};
     </script>
     <script src="dist/vendor.bundle.js"></script>
     <script src="dist/bundle.js"></script>
