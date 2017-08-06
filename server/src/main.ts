@@ -7,6 +7,8 @@ import * as bodyParser from 'body-parser';
 import * as path from 'path';
 import * as compression from 'compression';
 import * as morgan from 'morgan';
+import * as proxy from 'express-http-proxy';
+
 
 import getClientDomain from './get-client-domain';
 import bindApiCalls from './bind-api-calls';
@@ -53,7 +55,11 @@ app.get('/img/background.jpg', (req, res) => {
 
 app.get('/', sendIndex(db));
 app.get('/register', sendIndex(db));
-app.use(express.static('../public'))
+if (process.argv[2] === 'dev') {
+  app.get('*', proxy('localhost:3002'));
+} else {
+  app.use(express.static('../public'));
+}
 
 db.connect((err) => {
   if (err) {
