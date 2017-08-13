@@ -37,7 +37,10 @@ const results = ({
           : null
         }
         <p>
-          If you would like to be a part of this database, please <a onClick={()=>push('register')}>click here to sign up.</a> Email <a href={`mailto:${contactEmail}`} target="_blank" rel="noopener">{contactEmail}</a> for any questions.
+          If you would like to be a part of this database, please <a onClick={()=>push('register')}>click here to sign up.</a>
+        </p>
+        <p>
+          Email <a href={`mailto:${contactEmail}`} target="_blank" rel="noopener">{contactEmail}</a> for any questions.
         </p>
       </li>
     </ul>
