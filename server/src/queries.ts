@@ -143,3 +143,26 @@ export const register = (domain, name, email, subjectName) => chain(
     [email, subjectName]
   )
 );
+
+export const track = (domain, ip, action, data) => one(
+  `
+    INSERT INTO activity (
+      client_id,
+      ip,
+      action,
+      data
+    ) VALUES (
+      (SELECT id FROM clients WHERE domain = ?),
+      ?,
+      ?,
+      ${
+        action === 'selectSubject' 
+          ? 'CONCAT(?, " [", (SELECT id FROM subjects WHERE name = ?), "]")' 
+          : '?'
+      }
+    )
+  `,
+  action === 'selectSubject' 
+    ? [domain, ip, action, data, data] 
+    : [domain, ip, action, data]
+);
