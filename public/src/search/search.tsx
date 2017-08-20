@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
-import {selectSubject, clear} from './actions';
+import {selectSubject, clear, typing} from './actions';
 import {subject} from './selectors';
 import {searchInputTitle, subjectsWithStudents} from '../static-selectors';
 
@@ -12,6 +12,7 @@ import AutocompleteInput from '../autocomplete-input';
 const search = ({ 
   subject, 
   selectSubject,
+  typing,
   clear,
   searchInputTitle,
   subjectsWithStudents
@@ -27,7 +28,13 @@ const search = ({
         label={searchInputTitle}
         data={subjectsWithStudents}
         onSelect={selectSubject}
-        onChange={clear}
+        onChange={(text) => {
+          if (text === '') {
+            clear();
+          } else if (subjectsWithStudents.indexOf(text) < 0) {
+            typing(text);
+          }
+        }}
       />
     </form>
   );
@@ -40,6 +47,6 @@ const mapStateToProps = createStructuredSelector({
   subjectsWithStudents
 });
 
-const mapDispatchToProps = {selectSubject, clear};
+const mapDispatchToProps = {selectSubject, clear, typing};
 
 export default connect(mapStateToProps, mapDispatchToProps)(search);

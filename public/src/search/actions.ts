@@ -5,6 +5,12 @@ export const clear = ()=>({
   type: CLEAR
 })
 
+export const TYPING = 'alawmni/search/TYPING';
+export const typing = (text)=>({
+  type: TYPING,
+  text
+})
+
 export const SELECT_SUBJECT = 'alawmni/search/SELECT_SUBJECT';
 export const selectSubject = (subject: any)=>{
   return (dispatch, getState)=>{
