@@ -8,7 +8,7 @@ import createMemoryHistory from 'history/createMemoryHistory';
 
 const css = fs.readFileSync(path.resolve('../public/css/screen.css'), 'utf-8');
 
-export default (db) => (req, res) => {
+export default (IS_DEV, db) => (req, res) => {
   Promise.all([
     getClient(req.clientDomain)(db),
     getSubjectsWithStudents(req.clientDomain)(db),

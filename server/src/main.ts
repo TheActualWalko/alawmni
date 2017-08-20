@@ -21,7 +21,8 @@ const {
   MYSQL_PASSWORD, 
   MYSQL_DB, 
   PORT,
-  STATIC_DIR
+  STATIC_DIR,
+  IS_DEV
 } = JSON.parse(fs.readFileSync('.apiConfig', 'utf8'));
 
 const staticDir = path.resolve(STATIC_DIR);
@@ -53,8 +54,8 @@ app.get('/img/background.jpg', (req, res) => {
     .then((slug) => res.sendFile(`${staticDir}/${slug}/background.jpg`));
 });
 
-app.get('/', sendIndex(db));
-app.get('/register', sendIndex(db));
+app.get('/', sendIndex(IS_DEV, db));
+app.get('/register', sendIndex(IS_DEV, db));
 if (process.argv[2] === 'dev') {
   app.get('*', proxy('localhost:3002'));
 } else {
