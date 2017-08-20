@@ -26,7 +26,7 @@ const trackTyping = debounce((text) => {
 }, 500);
 
 const trackSelectSubject = (subject) => {
-  track('selectSubject', subject);
+  setTimeout(()=>track('selectSubject', subject), 500);
 }
 
 let lastText = '';
