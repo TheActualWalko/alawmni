@@ -41,4 +41,11 @@ export default (app, db) => {
       .then(() => res.send('success'))
       .catch(sendError(res));
   });
+
+  app.post('/track', (req, res)=>{
+    const {action, data} = req.body;
+    queries
+      .track(req.clientDomain, req.ip, action, data)(db)
+      .then(() => res.send('success'));
+  });
 }
