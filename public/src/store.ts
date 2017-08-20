@@ -3,6 +3,7 @@ import {createStore, applyMiddleware, combineReducers} from 'redux';
 import {routerReducer as routing, routerMiddleware} from 'react-router-redux';
 import search from './search/reducer';
 import register from './register/reducer';
+import analytics from './analytics';
 
 export default (statics, history) => {
   const reducer = combineReducers({
@@ -12,5 +13,5 @@ export default (statics, history) => {
     statics: (state, action) => statics
   });
 
-  return applyMiddleware(reduxThunk, routerMiddleware(history))(createStore)(reducer, undefined);
+  return applyMiddleware(reduxThunk, routerMiddleware(history), analytics)(createStore)(reducer, undefined);
 };
