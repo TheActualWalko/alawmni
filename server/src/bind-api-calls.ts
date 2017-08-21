@@ -50,9 +50,9 @@ export default (app, db) => {
       if (err) {
         throw err;
       } else {
-        const {lat, lon} = ipLocationResponse;
+        const {latitude, longitude} = ipLocationResponse;
         queries
-          .track(req.clientDomain, req.ip, lat, lon, action, data)(db)
+          .track(req.clientDomain, req.ip, latitude, longitude, action, data)(db)
           .then(() => res.send('success'));
       }
     });
