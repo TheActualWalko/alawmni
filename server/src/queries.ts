@@ -172,6 +172,6 @@ export const track = (domain, ip, lat, lon, action, data) => one(
 );
 
 export const getSessions = () => many(
-  `SELECT ip, timestamp FROM activity GROUP BY ip ORDER BY timestamp`,
+  `SELECT ip, lat, lon, client_id, timestamp FROM activity WHERE action="load" ORDER BY timestamp;`,
   []
 );
