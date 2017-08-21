@@ -1,3 +1,5 @@
+import * as iplocation from 'iplocation';
+
 import * as queries from './queries';
 
 const sendJSON = (res) => (result) => res.send(JSON.stringify(result, null, 2));
@@ -44,8 +46,15 @@ export default (app, db) => {
 
   app.post('/track', (req, res)=>{
     const {action, data} = req.body;
-    queries
-      .track(req.clientDomain, req.ip, action, data)(db)
-      .then(() => res.send('success'));
+    iplocation(req.ip, (err, ipLocationResponse) => {
+      if (err) {
+        throw err;
+      } else {
+        const {lat, lon} = ipLocationResponse;
+        queries
+          .track(req.clientDomain, req.ip, lat, lon, action, data)(db)
+          .then(() => res.send('success'));
+      }
+    });
   });
 }

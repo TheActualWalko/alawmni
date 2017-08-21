@@ -144,15 +144,19 @@ export const register = (domain, name, email, subjectName) => chain(
   )
 );
 
-export const track = (domain, ip, action, data) => one(
+export const track = (domain, ip, lat, lon, action, data) => one(
   `
     INSERT INTO activity (
       client_id,
       ip,
+      lat,
+      lon,
       action,
       data
     ) VALUES (
       (SELECT id FROM clients WHERE domain = ?),
+      ?,
+      ?,
       ?,
       ?,
       ${
@@ -163,6 +167,11 @@ export const track = (domain, ip, action, data) => one(
     )
   `,
   action === 'selectSubject' 
-    ? [domain, ip, action, data, data] 
-    : [domain, ip, action, data]
+    ? [domain, ip, lat, lon, action, data, data] 
+    : [domain, ip, lat, lon, action, data]
+);
+
+export const getSessions = () => many(
+  `SELECT ip, timestamp FROM activity GROUP BY ip ORDER BY timestamp`,
+  []
 );
