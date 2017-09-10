@@ -171,7 +171,7 @@ export const track = (domain, ip, lat, lon, action, data) => one(
     : [domain, ip, lat, lon, action, data]
 );
 
-export const getSessions = () => many(
-  `SELECT ip, lat, lon, client_id, timestamp FROM activity WHERE action="load" ORDER BY timestamp;`,
+export const getLastFortnightActivity = () => many(
+  `SELECT * FROM activity WHERE timestamp >= now() - INTERVAL 2 WEEK;`,
   []
 );
