@@ -1,7 +1,6 @@
 import * as iplocation from 'iplocation';
 
 import * as queries from './queries';
-import analytics from './analytics';
 
 
 const sendJSON = (res) => (result) => res.send(JSON.stringify(result, null, 2));
@@ -58,10 +57,5 @@ export default (app, db) => {
           .then(() => res.send('success'));
       }
     });
-  });
-
-  app.post('/analytics/:method', (req, res)=>{
-    analytics[req.params.method](req.body)(db)
-      .then((response) => res.send(response));
   });
 }
