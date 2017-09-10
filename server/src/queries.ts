@@ -172,6 +172,18 @@ export const track = (domain, ip, lat, lon, action, data) => one(
 );
 
 export const getLastFortnightActivity = () => many(
-  `SELECT * FROM activity WHERE timestamp >= now() - INTERVAL 2 WEEK;`,
+  `
+    SELECT 
+      ip, 
+      lat, 
+      lon, 
+      action, 
+      data, 
+      timestamp, 
+      (SELECT client_slug FROM clients WHERE id=activity.client_id) AS client_slug
+    FROM 
+      activity 
+    WHERE timestamp >= now() - INTERVAL 2 WEEK;
+  `,
   []
 );
