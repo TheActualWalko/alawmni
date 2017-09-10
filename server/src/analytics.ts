@@ -93,7 +93,10 @@ db.connect((err) => {
               return acc + `${heading}[${deltaTime}]${action}: ${data}${colors.reset}\n`;
             }, '')
         );
+        sessions.push(currentSession);
         const sessionCounts = {};
+        const registerCounts = {};
+        const clickStudentCounts = {};
         sessions.forEach((s) => {
           if (!s.length) {
             return;
@@ -101,21 +104,42 @@ db.connect((err) => {
           const client = s[0].client_slug;
           if (!sessionCounts[client]) {
             sessionCounts[client] = 0;
+            registerCounts[client] = 0;
+            clickStudentCounts[client] = 0;
           }
           sessionCounts[client] ++;
+          s.forEach((activity) => {
+            if (activity.action === 'register') {
+              registerCounts[client] ++;
+            } else if (activity.action === 'clickStudent') {
+              clickStudentCounts[client] ++;
+            }
+          })
         });
+
+        const logTotals = (totals) => {
+          Object.keys(totals).forEach((client_slug) => {
+            let count = totals[client_slug] + '';
+            while (count.length < 6) {
+              count = ' ' + count;
+            }
+            client_slug += ':';
+            while (client_slug.length < 8) {
+              client_slug += ' ';
+            }
+            console.log(`${client_slug} ${count}`);
+          });
+        }
+        
         console.log('Sessions per client:');
-        Object.keys(sessionCounts).forEach((client_slug) => {
-          let count = sessionCounts[client_slug] + '';
-          while (count.length < 6) {
-            count = ' ' + count;
-          }
-          client_slug += ':';
-          while (client_slug.length < 8) {
-            client_slug += ' ';
-          }
-          console.log(`${client_slug} ${count}`);
-        });
+        logTotals(sessionCounts);
+
+        console.log('\nRegistrations per client:');
+        logTotals(registerCounts);
+        
+        console.log('\nStudent clicks per client:');
+        logTotals(clickStudentCounts);
+        
         db.destroy();
       });
   }
