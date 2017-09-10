@@ -32,3 +32,10 @@ export const receiveStudents = (students: any[], subject: string)=>({
   students, 
   subject
 });
+
+
+export const CLICK_STUDENT = 'alawmni/search/CLICK_STUDENT';
+export const clickStudent = (studentID)=>({
+  type: CLICK_STUDENT,
+  studentID
+});

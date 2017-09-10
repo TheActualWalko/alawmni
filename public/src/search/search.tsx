@@ -3,7 +3,8 @@ import {createStructuredSelector} from 'reselect';
 import {selectSubject, clear, typing} from './actions';
 import {subject} from './selectors';
 import {searchInputTitle, subjectsWithStudents} from '../static-selectors';
-
+import Results from './results';
+      
 import React = require('react');
 
 import AutocompleteInput from '../autocomplete-input';
@@ -17,7 +18,7 @@ const search = ({
   searchInputTitle,
   subjectsWithStudents
 }) => {
-  return (
+  return <section>
     <form className="search" onSubmit={(e) => {
       e.preventDefault(); 
       e.stopPropagation(); 
@@ -37,7 +38,8 @@ const search = ({
         }}
       />
     </form>
-  );
+    <Results />
+  </section>;
 };
 
 

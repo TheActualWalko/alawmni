@@ -1,6 +1,7 @@
 import {
   TYPING,
-  SELECT_SUBJECT
+  SELECT_SUBJECT,
+  CLICK_STUDENT
 } from './search/actions';
 
 import $ = require('jquery');
@@ -29,6 +30,10 @@ const trackSelectSubject = (subject) => {
   setTimeout(()=>track('selectSubject', subject), 500);
 }
 
+const trackClickStudent = (studentID) => {
+  track('clickStudent', studentID);
+}
+
 let lastText = '';
 
 export default ({dispatch, getState}) => (next) => (action) => {
@@ -45,6 +50,8 @@ export default ({dispatch, getState}) => (next) => (action) => {
     case SELECT_SUBJECT:
       trackSelectSubject(action.subject);
       break;
+    case CLICK_STUDENT:
+      trackClickStudent(action.studentID)
   }
   next(action);
 }

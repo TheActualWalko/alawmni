@@ -2,7 +2,7 @@ import {one, many, chain} from './query';
 
 export const getStudentsForSubject = (domain, subjectName) => many(
   `
-    SELECT name, email 
+    SELECT id, name, email 
     FROM students 
     WHERE id IN (
       SELECT student_id 
