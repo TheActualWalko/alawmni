@@ -81,7 +81,8 @@ db.connect((err) => {
                 'typing': colors.dim,
                 'selectSubject': colors.fgGreen,
                 'clickStudent': colors.fgBlue,
-                'load': colors.fgWhite
+                'load': colors.fgWhite,
+                'register': colors.fgMagenta
               }[action] || colors.reset;
 
               while (action.length < 15) {

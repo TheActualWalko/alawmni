@@ -4,6 +4,10 @@ import {
   CLICK_STUDENT
 } from './search/actions';
 
+import {
+  REGISTER
+} from './register/actions';
+
 import $ = require('jquery');
 
 import {debounce} from 'lodash';
@@ -34,6 +38,10 @@ const trackClickStudent = (studentID) => {
   track('clickStudent', studentID);
 }
 
+const trackRegister = ({ email, firstName, lastName, subject }) => {
+  track('register', `${firstName} ${lastName}`);
+}
+
 let lastText = '';
 
 export default ({dispatch, getState}) => (next) => (action) => {
@@ -51,7 +59,9 @@ export default ({dispatch, getState}) => (next) => (action) => {
       trackSelectSubject(action.subject);
       break;
     case CLICK_STUDENT:
-      trackClickStudent(action.studentID)
+      trackClickStudent(action.studentID);
+    case REGISTER:
+      trackRegister(action);
   }
   next(action);
 }

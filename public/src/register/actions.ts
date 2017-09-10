@@ -34,9 +34,15 @@ export const updateEmail = (text: string)=>{
   };
 }
 
+export const REGISTER = 'alawmni/register/REGISTER';
 export const register = ()=>{
   return (dispatch, getState) => {
     const {email, firstName, lastName, subject, submittable} = getAll(getState());
+    dispatch({
+      type: REGISTER,
+      firstName,
+      lastName
+    });
     $.post(
       '/register', 
       { email, firstName, lastName, subject }, 
