@@ -66,7 +66,7 @@ db.connect((err) => {
               }
               currentSession.push(cur);
               let heading = isFirstOfSession
-                ? `\nSession ${moment(cur.timestamp).format('dddd, MMMM Do, YYYY, hh:mmA')} at location [${cur.lat}, ${cur.lon}]\n`
+                ? `\nSession ${moment(cur.timestamp).format('dddd, MMMM Do, YYYY, hh:mmA')} at location ${colors.fgCyan}google.com/maps/@${cur.lat},${cur.lon},10z${colors.reset}\n`
                 : '';
               let deltaTime = moment(
                 isFirstOfSession

@@ -60,8 +60,10 @@ export default ({dispatch, getState}) => (next) => (action) => {
       break;
     case CLICK_STUDENT:
       trackClickStudent(action.studentID);
+      break;
     case REGISTER:
       trackRegister(action);
+      break;
   }
   next(action);
 }
