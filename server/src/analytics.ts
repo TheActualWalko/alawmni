@@ -2,21 +2,7 @@ import * as mysql from 'mysql';
 import * as fs from 'fs';
 import * as moment from 'moment';
 
-import {getLastFortnightActivity} from './queries';
-
-const {
-  MYSQL_HOST, 
-  MYSQL_USERNAME, 
-  MYSQL_PASSWORD, 
-  MYSQL_DB
-} = JSON.parse(fs.readFileSync('.apiConfig', 'utf8'));
-
-const db = mysql.createConnection({
-  host: MYSQL_HOST,
-  user: MYSQL_USERNAME,
-  password: MYSQL_PASSWORD,
-  database: MYSQL_DB
-});
+import {getLastFortnightActivity, getLastFortnightActivityForClient} from './queries';
 
 const colors = {
   reset: '\x1b[0m',
@@ -46,11 +32,31 @@ const colors = {
   bgWhite: '\x1b[47m',
 };
 
+const {
+  MYSQL_HOST, 
+  MYSQL_USERNAME, 
+  MYSQL_PASSWORD, 
+  MYSQL_DB
+} = JSON.parse(fs.readFileSync('.apiConfig', 'utf8'));
+
+const clientFilter = process.argv[2];
+
+const query = clientFilter
+  ? getLastFortnightActivityForClient(clientFilter) 
+  : getLastFortnightActivity();
+
+const db = mysql.createConnection({
+  host: MYSQL_HOST,
+  user: MYSQL_USERNAME,
+  password: MYSQL_PASSWORD,
+  database: MYSQL_DB
+});
+
 db.connect((err) => {
   if (err) {
     console.error(err);
   } else {
-    getLastFortnightActivity()(db)
+    query(db)
       .then((results: any[]) => {
         let currentSessionStartTime;
         const sessions = [];

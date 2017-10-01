@@ -187,3 +187,23 @@ export const getLastFortnightActivity = () => many(
   `,
   []
 );
+
+export const getLastFortnightActivityForClient = (clientSlug) => many(
+  `
+    SELECT 
+      ip, 
+      lat, 
+      lon, 
+      action, 
+      data, 
+      timestamp, 
+      (SELECT client_slug FROM clients WHERE id=activity.client_id) AS client_slug
+    FROM 
+      activity 
+    WHERE 
+      timestamp >= now() - INTERVAL 2 WEEK
+    AND
+      client_id = (SELECT id FROM clients WHERE client_slug=?);
+  `,
+  [clientSlug]
+);
