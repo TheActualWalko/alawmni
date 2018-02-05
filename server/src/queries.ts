@@ -2,18 +2,18 @@ import {one, many, chain} from './query';
 
 export const getStudentsForSubject = (domain, subjectName) => many(
   `
-    SELECT id, name, email 
-    FROM students 
+    SELECT id, name, email
+    FROM students
     WHERE id IN (
-      SELECT student_id 
-      FROM student_subjects 
+      SELECT student_id
+      FROM student_subjects
       WHERE subject_id IN (
-        SELECT id FROM subjects WHERE name = ? 
+        SELECT id FROM subjects WHERE name = ?
       )
     )
     AND client_id IN (
-      SELECT id 
-      FROM clients 
+      SELECT id
+      FROM clients
       WHERE domain = ?
     );
   `,
@@ -27,10 +27,10 @@ export const getAllSubjects = () => many(
 
 export const getSubjectsWithStudents = (domain) => many(
   `
-    SELECT name 
+    SELECT name
     FROM subjects
     WHERE id IN (
-      SELECT subject_id 
+      SELECT subject_id
       FROM student_subjects
       WHERE student_id IN (
         SELECT id
@@ -57,26 +57,26 @@ export const getClientDomainFromSlug = (slug) => one(
 
 export const getClient = (domain) => one(
   `
-    SELECT 
-      id, 
-      app_display_name, 
-      contact_email, 
+    SELECT
+      id,
+      app_display_name,
+      contact_email,
       client_website,
       primary_color,
       secondary_color,
       search_input_title,
       recommended_searches_text,
       registration_subject_input_title
-    FROM 
-      clients 
-    WHERE 
+    FROM
+      clients
+    WHERE
       domain = ?;
    `,
   [domain],
   ({
-    id, 
-    app_display_name, 
-    contact_email, 
+    id,
+    app_display_name,
+    contact_email,
     client_website,
     primary_color,
     secondary_color,
@@ -106,12 +106,12 @@ export const register = (domain, name, email, subjectName) => chain(
   one(
     `
       INSERT INTO students (
-        name, 
-        email, 
+        name,
+        email,
         client_id
       ) VALUES (
-        ?, 
-        ?, 
+        ?,
+        ?,
         (SELECT id FROM clients WHERE domain = ?)
       ) ON DUPLICATE KEY UPDATE
         name = ?,
@@ -133,7 +133,7 @@ export const register = (domain, name, email, subjectName) => chain(
   one(
     `
       INSERT INTO student_subjects (
-        student_id, 
+        student_id,
         subject_id
       ) VALUES (
         (SELECT id FROM students WHERE email = ?),
@@ -160,48 +160,48 @@ export const track = (domain, ip, lat, lon, action, data) => one(
       ?,
       ?,
       ${
-        action === 'selectSubject' 
-          ? 'CONCAT(?, " [", (SELECT id FROM subjects WHERE name = ?), "]")' 
+        action === 'selectSubject'
+          ? 'CONCAT(?, " [", (SELECT id FROM subjects WHERE name = ?), "]")'
           : '?'
       }
     )
   `,
-  action === 'selectSubject' 
-    ? [domain, ip, lat, lon, action, data, data] 
+  action === 'selectSubject'
+    ? [domain, ip, lat, lon, action, data, data]
     : [domain, ip, lat, lon, action, data]
 );
 
 export const getLastFortnightActivity = () => many(
   `
-    SELECT 
-      ip, 
-      lat, 
-      lon, 
-      action, 
-      data, 
-      timestamp, 
+    SELECT
+      ip,
+      lat,
+      lon,
+      action,
+      data,
+      timestamp,
       (SELECT client_slug FROM clients WHERE id=activity.client_id) AS client_slug
-    FROM 
-      activity 
-    WHERE timestamp >= now() - INTERVAL 2 WEEK;
+    FROM
+      activity
+    WHERE timestamp >= now() - INTERVAL 4 WEEK;
   `,
   []
 );
 
 export const getLastFortnightActivityForClient = (clientSlug) => many(
   `
-    SELECT 
-      ip, 
-      lat, 
-      lon, 
-      action, 
-      data, 
-      timestamp, 
+    SELECT
+      ip,
+      lat,
+      lon,
+      action,
+      data,
+      timestamp,
       (SELECT client_slug FROM clients WHERE id=activity.client_id) AS client_slug
-    FROM 
-      activity 
-    WHERE 
-      timestamp >= now() - INTERVAL 2 WEEK
+    FROM
+      activity
+    WHERE
+      timestamp >= now() - INTERVAL 4 WEEK
     AND
       client_id = (SELECT id FROM clients WHERE client_slug=?);
   `,
